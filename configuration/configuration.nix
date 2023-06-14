@@ -44,9 +44,11 @@
       interfaces."tailscale0".allowedTCPPorts = [ 22 ];
       allowedTCPPortRanges = [ 
         { from = 1714; to = 1764; } # KDE Connect
+        { from = 23756; to = 23756; }
       ];  
       allowedUDPPortRanges = [ 
         { from = 1714; to = 1764; } # KDE Connect
+        { from = 23756; to = 23756; }
       ];
     };
   };
@@ -84,6 +86,7 @@
       displayManager.sddm.enable = true;
       desktopManager.plasma5.enable = true;
     };
+    logmein-hamachi.enable = true;
     printing.enable = true;
     hardware.openrgb.enable = true;
     flatpak.enable = true;

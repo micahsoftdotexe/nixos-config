@@ -20,7 +20,7 @@
 		home.stateVersion = "23.05";
 		home.packages = [pkgs.etcher pkgs.gitkraken pkgs.grails pkgs.keepassxc pkgs.slack pkgs.musescore 
 		pkgs.spotify pkgs.kdeconnect
-		pkgs.lutris pkgs.pixelorama pkgs.cpu-x pkgs.vlc pkgs.brave pkgs.wget pkgs.neofetch];
+		pkgs.lutris pkgs.pixelorama pkgs.cpu-x pkgs.vlc pkgs.brave pkgs.wget pkgs.neofetch pkgs.ardour pkgs.jetbrains-toolbox];
 		programs.vscode = {
 			enable = true;
 			extensions = with pkgs.vscode-extensions; [

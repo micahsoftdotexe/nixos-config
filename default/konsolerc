@@ -1,0 +1,26 @@
+[General]
+ConfigVersion=1
+
+[MainWindow]
+2 screens: Window-Maximized=true
+3 screens: Height=1361
+3 screens: Width=1272
+3 screens: XPosition=1920
+3 screens: YPosition=1080
+4 screens: Height=524
+4 screens: Width=911
+DP-2 DP-3 HDMI-1=HDMI-1
+DP-2 DP-3 HDMI-A-1 Height 2560x1440 HDMI-A-1=734
+DP-2 DP-3 HDMI-A-1 Width 2560x1440 HDMI-A-1=1108
+DP-3 HDMI-A-1 DP-2 Window-Maximized 2560x1440 HDMI-A-1=true
+HDMI-A-0 DisplayPort-1 DisplayPort-2=HDMI-A-0
+HDMI-A-0 DisplayPort-1 DisplayPort-2 Height 2560x1440 HDMI-A-0=554
+HDMI-A-0 DisplayPort-1 DisplayPort-2 Width 2560x1440 HDMI-A-0=911
+HDMI-A-0 DisplayPort-1 DisplayPort-2 XPosition 2560x1440 HDMI-A-0=2035
+HDMI-A-0 DisplayPort-1 DisplayPort-2 YPosition 2560x1440 HDMI-A-0=1505
+RestorePositionForNextInstance=false
+State=AAAA/wAAAAD9AAAAAQAAAAAAAAAAAAAAAPwCAAAAAvsAAAAiAFEAdQBpAGMAawBDAG8AbQBtAGEAbgBkAHMARABvAGMAawAAAAAA/////wAAAXwBAAAD+wAAABwAUwBTAEgATQBhAG4AYQBnAGUAcgBEAG8AYwBrAAAAAAD/////AAABFQEAAAMAAAOPAAAB3gAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABwAcwBlAHMAcwBpAG8AbgBUAG8AbwBsAGIAYQByAQAAAOj/////AAAAAAAAAAA=
+ToolBarsMovable=Disabled
+
+[UiSettings]
+ColorScheme=

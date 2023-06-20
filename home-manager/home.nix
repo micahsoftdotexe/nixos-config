@@ -14,7 +14,7 @@ in
     shell = pkgs.fish;
   };
 	#nixpkgs.config.allowUnfree = true;
-	home-manager.users.micaht = {pkgs, ...}: {
+	home-manager.users.${vars.user} = {pkgs, ...}: {
 		nixpkgs.config.allowUnfree = true;
 		nixpkgs.config.permittedInsecurePackages = [
 			"electron-12.2.3"

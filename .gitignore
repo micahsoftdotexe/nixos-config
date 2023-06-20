@@ -1,1 +1,2 @@
 configuration/hardware-configuration.nix
+env-vars.nix

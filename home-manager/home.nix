@@ -1,8 +1,10 @@
 { config, lib, pkgs, modulesPath, ... }:
-
+let 
+	vars = import ../env-vars.nix;
+in
 {
 	imports = [<home-manager/nixos>];
-	users.users.micaht = {
+	users.users.${vars.user} = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [

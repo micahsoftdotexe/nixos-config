@@ -3,6 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
+let
+  vars = import ../env-vars.nix;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -29,7 +32,7 @@
     };
     kernelModules = [ "i2c-dev" "i2c-piix4"];
   };
-  networking.hostName = "micahtronL"; # Define your hostname.
+  networking.hostName = vars.hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

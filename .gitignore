@@ -1,0 +1,5 @@
+configuration/hardware-configuration.nix
+env-vars.nix
+server/config/
+server/metadata/
+server/.lego/

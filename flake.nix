@@ -25,10 +25,10 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.micaht = import ./desktop/home.nix;
-            home-manager.sharedModules = [
-              hyprland.homeManagerModules.default
-              {wayland.windowManager.hyprland.enable = true;}
-            ];
+            # home-manager.sharedModules = [
+            #   hyprland.homeManagerModules.default
+            #   {wayland.windowManager.hyprland.enable = true;}
+            # ];
             nixpkgs.overlays = [
               nur.overlay 
             ];

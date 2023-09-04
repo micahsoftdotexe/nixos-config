@@ -10,8 +10,12 @@
 			telegram-desktop wireshark
 			gnomeExtensions.gsconnect
 			gnomeExtensions.user-themes-x
-			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu];
-	};
+			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu
+			wofi kitty
+		
+		
+		];
+	}; 
 	# home.stateVersion = "23.05";
 	# home.packages = [pkgs.etcher pkgs.gitkraken pkgs.grails pkgs.keepassxc pkgs.slack pkgs.musescore 
 	# pkgs.spotify pkgs.kdeconnect

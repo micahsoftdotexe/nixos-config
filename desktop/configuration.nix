@@ -90,8 +90,9 @@
       layout = "us";
       xkbVariant = "";
       displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+      # desktopManager.gnome.enable = true;
     };
+    gvfs.enable = true;
     # logmein-hamachi.enable = true;
     printing.enable = true;
     printing.drivers = [pkgs.gutenprint pkgs.gutenprintBin];
@@ -121,6 +122,18 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
+  xdg.portal = { enable = true; extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; };
+  # fonts = {
+  #   fontDir.enable = true;
+  #   packages = with pkgs; [
+  #     noto-fonts
+  #     noto-fonts-cjk
+  #     noto-fonts-emoji
+  #     liberation_ttf
+  #   ];
+  # };
+
+
   #services.jack.enable=true;
 
   users.users.micaht = {
@@ -139,9 +152,21 @@
   
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
-  programs.dconf.enable = true;
-  programs.fish.enable = true;
-  programs.adb.enable = true;
+  # programs.dconf.enable = true;
+  # programs.fish.enable = true;
+  # programs.adb.enable = true;
+  programs = {
+    dconf.enable = true;
+    fish.enable = true;
+    adb.enable = true;
+    thunar.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    };
+  };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -161,6 +186,7 @@
     virt-manager
     virtiofsd
     libguestfs-with-appliance
+    xdg-desktop-portal-hyprland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

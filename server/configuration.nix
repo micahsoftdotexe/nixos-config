@@ -125,6 +125,7 @@
 
     postgresql = {
       enable = true;
+      dataDir = "/disk1/postgresql/14";
       #initialScript = "${config.age.secrets.postgresql_initial_script.path}";
     };
 
@@ -159,6 +160,7 @@
                     "turn:turn.micahsoft.net:5349?transport=tcp"
                     "turn:turn.micahsoft.net:5350?transport=tcp"];
         server_name = "micahsoft.net";
+        dataDir = "/disk1/matrix-synapse";
         #listeners
         listeners = [
           {

@@ -2,7 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, modulesPath, inputs, ... }:
+{ config, pkgs, lib, modulesPath, inputs, nix-colors, ... }:
+
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -29,6 +30,7 @@
     };
     kernelModules = [ "i2c-dev" "i2c-piix4"];
   };
+
   nixpkgs.overlays = [ inputs.nur.overlay ];
   networking.hostName = "micahtronL"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -90,10 +92,11 @@
       layout = "us";
       xkbVariant = "";
       displayManager.gdm.enable = true;
+      excludePackages = [ pkgs.xterm ];
       # desktopManager.gnome.enable = true;
     };
     gvfs.enable = true;
-    # logmein-hamachi.enable = true;
+    mpd.enable = true;
     printing.enable = true;
     printing.drivers = [pkgs.gutenprint pkgs.gutenprintBin];
     hardware.openrgb.enable = true;
@@ -123,18 +126,6 @@
   security.rtkit.enable = true;
 
   xdg.portal = { enable = true; extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; };
-  # fonts = {
-  #   fontDir.enable = true;
-  #   packages = with pkgs; [
-  #     noto-fonts
-  #     noto-fonts-cjk
-  #     noto-fonts-emoji
-  #     liberation_ttf
-  #   ];
-  # };
-
-
-  #services.jack.enable=true;
 
   users.users.micaht = {
     isNormalUser = true;
@@ -152,9 +143,6 @@
   
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
-  # programs.dconf.enable = true;
-  # programs.fish.enable = true;
-  # programs.adb.enable = true;
   programs = {
     dconf.enable = true;
     fish.enable = true;
@@ -187,6 +175,7 @@
     virtiofsd
     libguestfs-with-appliance
     xdg-desktop-portal-hyprland
+    python3
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

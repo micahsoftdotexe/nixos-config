@@ -7,10 +7,11 @@
     home-manager.url = "github:nix-community/home-manager";
     hyprland.url = "github:hyprwm/Hyprland";
     agenix.url = "github:ryantm/agenix";
+    nix-colors.url = "github:misterio77/nix-colors";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, agenix, ... }:
+  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, agenix, ... }:
     /* ignore:: */ let ignoreme = ({config,lib,...}: with lib; { system.nixos.revision = mkForce null; system.nixos.versionSuffix = mkForce "pre-git"; }); in
   {
     nixosConfigurations = {
@@ -25,6 +26,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.micaht = import ./desktop/home.nix;
+            home-manager.extraSpecialArgs = { inherit nix-colors; };
+            
             # home-manager.sharedModules = [
             #   hyprland.homeManagerModules.default
             #   {wayland.windowManager.hyprland.enable = true;}

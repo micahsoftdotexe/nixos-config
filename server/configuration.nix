@@ -135,7 +135,7 @@
     postgresql = {
       enable = true;
       dataDir = "/disk1/postgresql/14";
-      #initialScript = "${config.age.secrets.postgresql_initial_script.path}";
+      initialScript = "${config.age.secrets.postgresql_initial_script.path}";
     };
 
     coturn = rec {
@@ -185,14 +185,8 @@
         ];
 
       };
-      extraConfigFiles = [ config.age.secrets.turn_secret.path ];
-     
-      # registration_shared_secret = "1234";
-      
+      extraConfigFiles = [ config.age.secrets.turn_secret.path ];      
     };
-    # matrix-synapse = {
-    #   enable = 
-    # }
     
     #jellyfin
     jellyfin.enable = true;

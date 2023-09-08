@@ -87,12 +87,17 @@
 
     nginx = {
       enable = true;
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
       virtualHosts = {
         "audiobooks.micahsoft.net" = {
           useACMEHost = "micahsoft.net";
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:8001";
+            proxyWebsockets = true;
           };
         };
         "jellyfin.micahsoft.net" = {
@@ -100,6 +105,10 @@
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://127.0.0.1:8096";
+          };
+          locations."/socket" = {
+            proxyPass = "http://127.0.0.1:8096";
+            proxyWebsockets = true;
           };
         };
         "passwords.micahsoft.net" = {
@@ -235,6 +244,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs.ssh.startAgent = true;
 
   # List services that you want to enable:
 

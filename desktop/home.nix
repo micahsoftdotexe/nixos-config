@@ -19,10 +19,8 @@ in
 			kdeconnect
 			lutris pixelorama cpu-x vlc vivaldi wget neofetch ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
 			telegram-desktop wireshark
-			# gnomeExtensions.gsconnect
-			# gnomeExtensions.user-themes-x
 			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu
-			hyprpaper eww-wayland acpi mpc-cli
+			hyprpaper eww-wayland acpi mpc-cli pavucontrol hyprpicker
 		
 		
 		];

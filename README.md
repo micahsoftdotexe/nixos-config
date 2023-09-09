@@ -1,2 +1,2 @@
 # nixos
-https://github.com/juminai/dotfiles
+https://github.com/smravec/.dotfiles-hyprland

@@ -176,6 +176,7 @@
     libguestfs-with-appliance
     xdg-desktop-portal-hyprland
     python3
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

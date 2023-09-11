@@ -61,6 +61,14 @@
     };
   };
 
+  
+
+  fonts.packages = with pkgs; [
+    material-design-icons
+    jetbrains-mono
+  ];
+
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -151,7 +159,7 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     };
   };
@@ -175,7 +183,10 @@
     virtiofsd
     libguestfs-with-appliance
     xdg-desktop-portal-hyprland
-    python3
+    (python3.withPackages(ps: with ps; [ pygobject3 ]))
+    pkgconfig
+    gparted
+    polkit-kde-agent
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
 

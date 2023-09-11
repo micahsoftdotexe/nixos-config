@@ -30,7 +30,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.micaht = import ./desktop/home.nix;
-            home-manager.extraSpecialArgs = { inherit nix-colors; };
+            home-manager.extraSpecialArgs = { inherit nix-colors inputs; };
             
             # home-manager.sharedModules = [
             #   hyprland.homeManagerModules.default
@@ -38,6 +38,11 @@
             # ];
             nixpkgs.overlays = [
               nur.overlay 
+              (self: super: {
+                waybar = super.waybar.overrideAttrs (oldAttrs: {
+                  mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+                });
+              })
             ];
 
           }

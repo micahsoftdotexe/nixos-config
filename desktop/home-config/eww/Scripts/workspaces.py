@@ -10,7 +10,7 @@ def update_workspace(active_workspace):
     icons_index = [0,1,2,3,4] 
     
     icons_index[active_workspace - 1] = icons_index[active_workspace - 1] + 5
-    prompt = f"(box (label :text \"{icons[icons_index[0]]}  {icons[icons_index[1]]}  {icons[icons_index[2]]}  {icons[icons_index[3]]}  {icons[icons_index[4]]}\" ))"
+    prompt = f"(box (label :text \"{icons[icons_index[0]]}  {icons[icons_index[1]]}\" ))"
     
     subprocess.run(f"echo '{prompt}'", 
                    shell=True)

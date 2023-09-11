@@ -20,7 +20,7 @@ in
 			lutris pixelorama cpu-x vlc vivaldi wget neofetch ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
 			telegram-desktop wireshark
 			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu
-			hyprpaper eww-wayland acpi mpc-cli pavucontrol hyprpicker
+			hyprpaper eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer waybar cava playerctl pamixer
 		
 		
 		];

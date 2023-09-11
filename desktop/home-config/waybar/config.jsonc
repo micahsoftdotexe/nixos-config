@@ -1,0 +1,209 @@
+{
+  "layer": "top",
+  "modules-left": [
+    // "custom/arch",
+    "hyprland/workspaces",
+    "custom/spotify",
+    "cava"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "network",
+    "network#2",
+    // "disk",
+    // "memory",
+    // "cpu",
+    // "bluetooth",
+    "pulseaudio"
+    // "tray",
+    // "custom/notification"
+  ],
+  "margin-top": 5,
+  "margin-left": 5,
+  "margin-right": 5,
+  // "custom/arch": {
+  //   "format": " <span color=\"#5E81AC\"> </span>",
+  //   "tooltip": false,
+  //   "on-click": "sh $HOME/.config/rofi/powermenu/type-2/powermenu.sh"
+  // },
+  "hyprland/workspaces": {
+    // "disable-scroll": true,
+    "all-outputs": true,
+    // waybar"on-click": "activate",
+    "format": "{icon}",
+    "active-only": false,
+    "persistent_workspaces": {
+      "m1d1": ["HDMI-A-1"],
+      "m1d2": ["HDMI-A-1"],
+      "m2d1": ["DP-3"],
+      "m2d2": ["DP-3"],
+      "m3d1": ["DP-2"],
+      "m3d2": ["DP-2"],
+      "m4d1": ["DP-1"],
+      "m4d2": ["DP-1"]
+    },
+    "format-icons" : {
+      "default": "󰄰",
+      "active": "󰄯"
+    }
+  },
+  "hyprland/window": {
+    "max-length": 200,
+    "separate-outputs": true
+  },
+  "clock": {
+    "format": "<span color=\"#5E81AC\">󰃰</span>  {:%d.%m.%y 󰇙 %H:%M}"
+  },
+  "clock#2": {
+    "format": "<span color=\"#a6da95\"></span>  {:%d.%m.%Y}"
+  },
+  "pulseaudio": {
+    // "on-click": "exec pavucontrol",
+    // "format": "<span color=\"#c6a0f6\"> {icon}</span>",
+    // "format-muted": " ",
+    // "tooltip": false,
+    // "format-icons": {
+    //   "headphone": "",
+    //   "default": [
+    //     "",
+    //     "",
+    //     "󰕾",
+    //     "󰕾",
+    //     "󰕾",
+    //     "",
+    //     "",
+    //     ""
+    //   ]
+    // },
+    // "scroll-step": 0
+    "format": "{icon}",
+    "format-muted": "󰖁",
+    "format-icons": {
+        "default": ["", "", "󰕾"]
+    },
+    "on-click": "pamixer -t",
+    "on-scroll-up": "pamixer -i 1",
+    "on-scroll-down": "pamixer -d 1",
+    "on-click-right": "exec pavucontrol",
+    "tooltip-format" : "Volume {volume}%"
+  },
+  "bluetooth": {
+    "format": "<span rise='-1000' color='#b4befe'></span> {status}",
+    "format-disabled": "", // an empty format will hide the module
+    "format-connected": "<span color=\"#8aadf4\"></span> {num_connections}",
+    "tooltip-format": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}   {device_address}"
+  },
+  "cava": {
+    "framerate": 60,
+    "autosens": 0,
+    "sensitivity": 30,
+    "bars": 16,
+    "lower_cutoff_freq": 50,
+    "higher_cutoff_freq": 10000,
+    "method": "pulse",
+    "source": "auto",
+    "stereo": true,
+    "reverse": false,
+    "bar_delimiter": 0,
+    "monstercat": false,
+    "waves": true,
+    "noise_reduction": 0.77,
+    "input_delay": 2,
+    "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+    "actions": {
+                "on-click-right": "mode"
+                }
+  },
+  "network": {
+    "interface": "enp5s0",
+    "interval": 2,
+    "format": "{ifname}",
+    "format-ethernet": "<span rise='-1500' color=\"#c6a0f6\">󰛳</span> {bandwidthUpBytes}",
+    "min-length": 0,
+    "format-disconnected": "󰲝 No Network",
+    "tooltip": false
+  },
+  "network#2": {
+    "interface": "tailscale0",
+    "interval": 2,
+    "format": "{ifname}",
+    "format-ethernet": "<span rise='-1500' color=\"#91d7e3\">󰌗</span> {bandwidthDownBytes}",
+    "min-length": 13,
+    "format-disconncted": "󰌗 No Network",
+    "tooltip": false
+  },
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "format-charging": "> {capacity}%",
+    "tooltip": false
+  },
+  "cpu": {
+    "interval": 1,
+    "format": "<span rise='-1000' color=\"#5E81AC\"></span>{usage:2}%",
+    "min-length": 6
+  },
+  "memory": {
+    "interval": 10,
+    "format": "<span rise='-1000' color=\"#5E81AC\"> </span>{used:0.1f}G",
+    "min-length": 6
+  },
+  "disk": {
+    "interval": 1,
+    "format": "<span rise='-1000' color=\"#5E81AC\"> </span>{free}"
+  },
+  "custom/spotify": {
+    "exec": "nix-shell ~/.config/waybar/scripts/mediaplayer.py --player youtube-music",
+    "format": " {}",
+    "return-type": "json",
+    "on-click": "playerctl play-pause",
+    "on-double-click-right": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+  "custom/weather": {
+    "exec": "$HOME/.dots/waybar/scripts/weather.sh",
+    "format": "<span rise='10000'>{}</span>",
+    "return-type": "json",
+    "interval": 300
+  },
+
+  "tray": {
+    "icon-size": 28,
+    "spacing": 10,
+    "tooltip": true
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
+}

@@ -12,6 +12,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     agenix.url = "github:ryantm/agenix";
     nix-colors.url = "github:misterio77/nix-colors";
+    waybar.url = "github:alexays/waybar";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -38,11 +39,11 @@
             # ];
             nixpkgs.overlays = [
               nur.overlay 
-              (self: super: {
-                waybar = super.waybar.overrideAttrs (oldAttrs: {
-                  mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-                });
-              })
+              # (self: super: {
+              #   waybar = super.waybar.overrideAttrs (oldAttrs: {
+              #     mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+              #   });
+              # })
             ];
 
           }

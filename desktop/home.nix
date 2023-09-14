@@ -15,13 +15,11 @@ in
 	home = {
 		stateVersion = "23.05";
 		packages = with pkgs; [etcher gitkraken grails keepassxc slack musescore 
-			spotify 
-			kdeconnect
-			lutris pixelorama cpu-x vlc vivaldi wget neofetch ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
-			telegram-desktop wireshark
-			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu
-			hyprpaper eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer waybar cava playerctl pamixer
-		
+			spotify kdeconnect lutris pixelorama cpu-x vlc vivaldi wget neofetch
+			telegram-desktop wireshark ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
+			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu gitui
+			hyprpaper eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
+			ark
 		
 		];
 		file."colors.txt".text = ''
@@ -60,6 +58,12 @@ in
 				ms-vsliveshare.vsliveshare
 				
 			];
+		};
+		waybar = {
+			enable = true;
+			package = inputs.waybar.packages.${pkgs.system}.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      });
 		};
 		wofi = {
 			enable = true;

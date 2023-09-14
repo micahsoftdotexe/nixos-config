@@ -48,7 +48,8 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      interfaces."tailscale0".allowedTCPPorts = [ 22 80 ];
+      interfaces."tailscale0".allowedTCPPorts = [ 22 80 7777 ];
+      interfaces."tailscale0".allowedUDPPorts = [ 7777 ];
       allowedTCPPortRanges = [ 
         { from = 1714; to = 1764; } # KDE Connect
         { from = 23756; to = 23756; }
@@ -151,6 +152,7 @@
   
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
+  hardware.cpu.amd.updateMicrocode = true;
   programs = {
     dconf.enable = true;
     fish.enable = true;
@@ -182,7 +184,9 @@
     virt-manager
     virtiofsd
     libguestfs-with-appliance
-    xdg-desktop-portal-hyprland
+    lm_sensors
+    gnome.gnome-disk-utility
+    # xdg-desktop-portal-hyprland
     (python3.withPackages(ps: with ps; [ pygobject3 ]))
     pkgconfig
     gparted

@@ -16,4 +16,5 @@ in
   "secrets/matrix/turn_secret.age".publicKeys = [micaht micahtronserver];
   "secrets/coturn/coturn_turn_secret.age".publicKeys = [micaht micahtronserver];
   "secrets/postgresql/matrix-database.sql.age".publicKeys = [micaht micahtronserver];
+  "secrets/waybar/weather.sh.age".publicKeys = [micaht micahtronL];
 }

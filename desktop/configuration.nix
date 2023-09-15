@@ -31,6 +31,15 @@
     kernelModules = [ "i2c-dev" "i2c-piix4"];
   };
 
+  # age = {
+  #   secrets = {
+  #     weather_script = {
+  #       file = ../secrets/waybar/weather.sh.age;
+  #     };
+  #   };
+  #   identityPaths = ["/home/micaht/.ssh/micaht" "/home/micaht/.ssh/micahtronL"];
+  # };
+
   nixpkgs.overlays = [ inputs.nur.overlay ];
   networking.hostName = "micahtronL"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -152,7 +161,6 @@
   
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
-  hardware.cpu.amd.updateMicrocode = true;
   programs = {
     dconf.enable = true;
     fish.enable = true;
@@ -192,6 +200,7 @@
     gparted
     polkit-kde-agent
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+    direnv
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

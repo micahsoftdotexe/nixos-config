@@ -21,15 +21,6 @@ window#waybar {
   padding-right: 5px;
 
 }
-#cava.hidden {
-  background-color: red;
-}
-
-#custom-arch {
-  margin-left: 10px;
-  background-color: rgba(29, 32, 33, 1);
-  margin-left: 10px;
-}
 
 #workspaces button {
   padding-left: 3px;

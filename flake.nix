@@ -31,12 +31,13 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.micaht = import ./desktop/home.nix;
-            home-manager.extraSpecialArgs = { inherit nix-colors inputs; };
+            home-manager.extraSpecialArgs = { inherit nix-colors inputs builtins; };
             
-            # home-manager.sharedModules = [
-            #   hyprland.homeManagerModules.default
-            #   {wayland.windowManager.hyprland.enable = true;}
-            # ];
+            home-manager.sharedModules = [
+              agenix.homeManagerModules.default
+              # hyprland.homeManagerModules.default
+              # {wayland.windowManager.hyprland.enable = true;}
+            ];
             nixpkgs.overlays = [
               nur.overlay 
               # (self: super: {

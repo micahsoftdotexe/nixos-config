@@ -7,10 +7,11 @@
     home-manager.url = "github:nix-community/home-manager";
     hyprland.url = "github:hyprwm/Hyprland";
     agenix.url = "github:ryantm/agenix";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, agenix, ... }:
+  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, agenix, vscode-server,  ... }:
     /* ignore:: */ let ignoreme = ({config,lib,...}: with lib; { system.nixos.revision = mkForce null; system.nixos.versionSuffix = mkForce "pre-git"; }); in
   {
     nixosConfigurations = {
@@ -63,6 +64,7 @@
         modules = [
           ./server/configuration.nix
           agenix.nixosModules.default
+	  vscode-server.nixosModules.default
 
         ];
         specialArgs = { inherit inputs; };

@@ -64,8 +64,7 @@
         modules = [
           ./server/configuration.nix
           agenix.nixosModules.default
-	  vscode-server.nixosModules.default
-
+	        vscode-server.nixosModules.default
         ];
         specialArgs = { inherit inputs; };
       };

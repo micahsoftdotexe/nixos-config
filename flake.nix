@@ -13,10 +13,11 @@
     agenix.url = "github:ryantm/agenix";
     nix-colors.url = "github:misterio77/nix-colors";
     waybar.url = "github:alexays/waybar";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, agenix, ... }:
+  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, agenix, vscode-server,  ... }:
     /* ignore:: */ let ignoreme = ({config,lib,...}: with lib; { system.nixos.revision = mkForce null; system.nixos.versionSuffix = mkForce "pre-git"; }); in
   {
     nixosConfigurations = {
@@ -77,7 +78,7 @@
         modules = [
           ./server/configuration.nix
           agenix.nixosModules.default
-
+	        vscode-server.nixosModules.default
         ];
         specialArgs = { inherit inputs; };
       };

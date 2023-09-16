@@ -2,12 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, vscode-server, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/containers/containers.nix
+      ./modules/services/coturn.nix
+      ./modules/services/nginx.nix
+      ./modules/services/matrix.nix
+      ./modules/services/postgresql.nix
+      
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -84,109 +90,7 @@
 
   };
   services = {
-
-    nginx = {
-      enable = true;
-      recommendedGzipSettings = true;
-      recommendedOptimisation = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
-      virtualHosts = {
-        "audiobooks.micahsoft.net" = {
-          useACMEHost = "micahsoft.net";
-          forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8001";
-            proxyWebsockets = true;
-          };
-        };
-        "jellyfin.micahsoft.net" = {
-          useACMEHost = "micahsoft.net";
-          forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8096";
-          };
-          locations."/socket" = {
-            proxyPass = "http://127.0.0.1:8096";
-            proxyWebsockets = true;
-          };
-        };
-        "passwords.micahsoft.net" = {
-          useACMEHost = "micahsoft.net";
-          forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8000";
-          };
-        };
-        "turn.micahsoft.net" = {
-          useACMEHost = config.services.coturn.realm;
-          forceSSL = true;
-        };
-        "matrix.micahsoft.net" = {
-          useACMEHost = "micahsoft.net";
-          forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8008";
-          };
-        };
-      };
-    };
-
-    postgresql = {
-      enable = true;
-      dataDir = "/disk1/postgresql/14";
-      initialScript = "${config.age.secrets.postgresql_initial_script.path}";
-    };
-
-    coturn = rec {
-      enable = true;
-      lt-cred-mech = true;
-      use-auth-secret = true;
-      static-auth-secret-file = "${config.age.secrets.coturn_turn_secret.path}";
-      realm = "turn.micahsoft.net";
-      relay-ips = [
-        "100.123.59.107"
-      ];
-      no-tcp-relay = true;
-      extraConfig = "
-        cipher-list=\"HIGH\"
-        no-loopback-peers
-        no-multicast-peers
-      ";
-      secure-stun = true;
-      cert = "${config.security.acme.certs.${realm}.directory}/full.pem";
-      pkey = "${config.security.acme.certs.${realm}.directory}/key.pem";
-      min-port = 49152;
-      max-port = 49999;
-    };
-    matrix-synapse = with config.services.coturn; {
-      enable = true;
-      settings = {
-        enable_registration = true;
-        enable_registration_without_verification = true;
-        turn_uris = ["turn:turn.micahsoft.net:5349?transport=udp"
-                    "turn:turn.micahsoft.net:5350?transport=udp"
-                    "turn:turn.micahsoft.net:5349?transport=tcp"
-                    "turn:turn.micahsoft.net:5350?transport=tcp"];
-        server_name = "micahsoft.net";
-        dataDir = "/disk1/matrix-synapse";
-        #listeners
-        listeners = [
-          {
-            port = 8008;
-            tls = false;
-            resources = [
-              {
-                compress = false;
-                names = ["client" "federation"];
-              }
-            ];
-          }
-        ];
-
-      };
-      extraConfigFiles = [ config.age.secrets.turn_secret.path ];      
-    };
+    vscode-server.enable = true;
     
     #jellyfin
     jellyfin.enable = true;
@@ -201,25 +105,7 @@
       enable = true;
       # permitCertUid = "caddy";
     };
-    #vscode
   };
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers.homeassistant = {
-      volumes = [ "/disk1/homeassistant/config:/config" ];
-      environment.TZ = "America/New_York";
-      image = "ghcr.io/home-assistant/home-assistant:2023.8.3"; # Warning: if the tag does not change, the image will not be updated
-      extraOptions = [ 
-        "--network=host" 
-        "--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
-      ];
-    };
-    containers.audiobookshelf = {
-      image = "ghcr.io/advplyr/audiobookshelf:2.3.3";
-      ports = ["8001:80"];
-      volumes = [ "/disk1/audiobooks/books:/audiobooks" "/disk1/audiobooks/metadata:/metadata" "/disk1/audiobooks/config:/config" ];
-    };
-  }; 
 
   virtualisation.docker.enable = true;   
 

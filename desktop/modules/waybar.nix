@@ -58,7 +58,7 @@
             format = "{icon}";
             format-muted = "󰖁";
             format-icons = {
-              default = ["" "" "󰕾"];
+              default = ["󰕿" "󰖀" "󰕾"];
             };
             on-click = "pamixer -t";
             on-scroll-up = "pamixer -i 1";

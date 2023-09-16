@@ -196,7 +196,7 @@
     gnome.gnome-disk-utility
     # xdg-desktop-portal-hyprland
     (python3.withPackages(ps: with ps; [ pygobject3 ]))
-    pkgconfig
+    pkg-config
     gparted
     polkit-kde-agent
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast

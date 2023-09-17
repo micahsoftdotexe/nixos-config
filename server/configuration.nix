@@ -13,6 +13,7 @@
       ./modules/services/nginx.nix
       ./modules/services/matrix.nix
       ./modules/services/postgresql.nix
+      ./modules/services/navidrome.nix
       
     ];
 
@@ -115,7 +116,7 @@
   #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #   wget
   # ];
-  environment.systemPackages = [ pkgs.tailscale inputs.agenix.packages.x86_64-linux.default pkgs.git pkgs.gitui ];
+  environment.systemPackages = [ pkgs.tailscale inputs.agenix.packages.x86_64-linux.default pkgs.git pkgs.gitui pkgs.navidrome pkgs.kitty ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

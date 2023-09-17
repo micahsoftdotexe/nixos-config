@@ -15,6 +15,7 @@
     waybar.url = "github:alexays/waybar";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    micahpkgs.url = "git+file:///home/micaht/nixpkgs";
   };
 
   outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, agenix, vscode-server,  ... }:

@@ -5,8 +5,10 @@
 { config, pkgs, inputs, vscode-server, ... }:
 
 {
+  disabledModules = [ "services/audio/navidrome.nix" ];
   imports =
     [ # Include the results of the hardware scan.
+      "${inputs.micahpkgs}/nixos/modules/services/audio/navidrome.nix"
       ./hardware-configuration.nix
       ./modules/containers/containers.nix
       ./modules/services/coturn.nix

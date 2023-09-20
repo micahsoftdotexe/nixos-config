@@ -163,7 +163,12 @@
   virtualisation.libvirtd.enable = true;
   programs = {
     dconf.enable = true;
-    fish.enable = true;
+    fish = {
+      enable = true;
+      promptInit =''
+        any-nix-shell fish --info-right | source
+      '';
+    };
     adb.enable = true;
     thunar.enable = true;
     hyprland = {
@@ -179,6 +184,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    any-nix-shell
     carla
     firefox
     git
@@ -194,7 +200,6 @@
     libguestfs-with-appliance
     lm_sensors
     gnome.gnome-disk-utility
-    # xdg-desktop-portal-hyprland
     (python3.withPackages(ps: with ps; [ pygobject3 ]))
     pkg-config
     gparted

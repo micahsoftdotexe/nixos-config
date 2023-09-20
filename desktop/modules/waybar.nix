@@ -52,7 +52,7 @@
             separate-outputs = false;
           };
           clock = {
-            format = "<span color=\"#5E81AC\">󰃰</span>  {:%d.%m.%y 󰇙 %H:%M}";
+            format = "<span color=\"#5E81AC\">󰃰</span>  {:%d.%m.%y 󰇙 %I:%M%p}";
           };
           pulseaudio = {
             format = "{icon}";

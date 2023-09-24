@@ -31,9 +31,9 @@ in
 		packages = with pkgs; [etcher gitkraken grails keepassxc slack musescore 
 			spotify kdeconnect lutris pixelorama cpu-x vlc vivaldi wget neofetch
 			telegram-desktop wireshark ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
-			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu gitui
-			hyprpaper eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
-   	 	inputs.agenix.packages.${pkgs.system}.default
+			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu
+			eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
+   	 	inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww
 			ark 
 		
 		];
@@ -75,19 +75,4 @@ in
 			];
 		};
 	};
-	# home.stateVersion = "23.05";
-	# home.packages = [pkgs.etcher pkgs.gitkraken pkgs.grails pkgs.keepassxc pkgs.slack pkgs.musescore 
-	# pkgs.spotify pkgs.kdeconnect
-	# pkgs.lutris pkgs.pixelorama pkgs.cpu-x pkgs.vlc pkgs.brave pkgs.wget pkgs.neofetch pkgs.ardour pkgs.jetbrains-toolbox pkgs.heroic pkgs.nur.repos.jakobrs.bobrossquotes
-	# pkgs.telegram-desktop pkgs.wireshark];
-
-
-	# programs.vscode = {
-	# 	enable = true;
-	# 	extensions = with pkgs.vscode-extensions; [
-	# 		bbenoist.nix
-	# 		ms-vsliveshare.vsliveshare
-			
-	# 	];
-	# };
 }

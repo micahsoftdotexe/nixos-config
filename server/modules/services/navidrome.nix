@@ -5,7 +5,7 @@
 		settings = {
 			Address = "127.0.0.1";
 			MusicFolder = "/disk0/music/music";
-			DataFolder = "/disk0/navidrome/data";
+			DataFolder = "/disk0/music/data";
 			EnableTranscodingConfig = true;
 		};
 	};

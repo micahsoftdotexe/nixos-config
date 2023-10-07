@@ -44,6 +44,14 @@
             proxyPass = "http://127.0.0.1:8008";
           };
         };
+        "notes.micahsoft.net" = {
+          useACMEHost = "micahsoft.net";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:5984";
+            proxyWebsockets = true;
+          };
+        };
       };
     };
 }

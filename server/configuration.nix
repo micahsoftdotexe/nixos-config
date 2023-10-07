@@ -38,6 +38,12 @@
       postgresql_initial_script = {
         file = ../secrets/postgresql/matrix-database.sql.age;
       };
+      liveSync_env = {
+        file = ../secrets/liveSync/livesync.env.age;
+      };
+      liveSync_couch = {
+        file = ../secrets/liveSync/couchdb.ini.age;
+      };
     };
     identityPaths = ["/home/micaht/.ssh/micaht" "/etc/ssh/micahtronserver"];
   };

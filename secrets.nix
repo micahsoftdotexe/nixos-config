@@ -17,4 +17,6 @@ in
   "secrets/coturn/coturn_turn_secret.age".publicKeys = [micaht micahtronserver];
   "secrets/postgresql/matrix-database.sql.age".publicKeys = [micaht micahtronserver];
   "secrets/waybar/weather.sh.age".publicKeys = [micaht micahtronL];
+  "secrets/liveSync/livesync.env.age".publicKeys = [micaht micahtronserver];
+  "secrets/liveSync/couchdb.ini.age".publicKeys = [micaht micahtronserver];
 }

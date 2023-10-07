@@ -12,9 +12,23 @@
 			];
 		};
 		containers.audiobookshelf = {
-			image = "ghcr.io/advplyr/audiobookshelf:2.4.3";
+			image = "ghcr.io/advplyr/audiobookshelf:edge";
 			ports = ["8001:80"];
 			volumes = [ "/disk1/audiobooks/books:/audiobooks" "/disk1/audiobooks/metadata:/metadata" "/disk1/audiobooks/config:/config" ];
+		};
+		containers.live-sync = {
+			image = "couchdb";
+			environmentFiles = [
+				config.age.secrets.liveSync_env.path
+			];
+			volumes = [
+				"/disk0/liveSync:/opt/couchdb/data"
+				"/disk1/nixos-config/server/modules/containers/couchdb.ini:/opt/couchdb/etc/local.ini"
+			];
+			ports = [
+				"5984:5984"
+			];
+
 		};
 	};
 }

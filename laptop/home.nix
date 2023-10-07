@@ -3,7 +3,7 @@
 	nixpkgs.config.allowUnfree = true;
 	
 	home.stateVersion = "23.05";
-	home.packages = [ pkgs.musescore pkgs.kdeconnect pkgs.neofetch pkgs.heroic pkgs.nur.repos.jakobrs.bobrossquotes pkgs.vlc];
+	home.packages = with pkgs; [ musescore kdeconnect neofetch heroic vlc insomnia obsidian gittyup ];
 	programs.vscode = {
 		enable = true;
 		extensions = with pkgs.vscode-extensions; [

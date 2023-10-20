@@ -15,6 +15,7 @@
       ./modules/services/nginx.nix
       ./modules/services/matrix.nix
       ./modules/services/postgresql.nix
+      ./modules/services/navidrome.nix
       
     ];
 
@@ -36,6 +37,12 @@
       };
       postgresql_initial_script = {
         file = ../secrets/postgresql/matrix-database.sql.age;
+      };
+      liveSync_env = {
+        file = ../secrets/liveSync/livesync.env.age;
+      };
+      liveSync_couch = {
+        file = ../secrets/liveSync/couchdb.ini.age;
       };
     };
     identityPaths = ["/home/micaht/.ssh/micaht" "/etc/ssh/micahtronserver"];
@@ -117,7 +124,7 @@
   #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #   wget
   # ];
-  environment.systemPackages = [ pkgs.tailscale inputs.agenix.packages.x86_64-linux.default pkgs.git pkgs.gitui ];
+  environment.systemPackages = [ pkgs.tailscale inputs.agenix.packages.x86_64-linux.default pkgs.git pkgs.gitui pkgs.navidrome pkgs.kitty ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

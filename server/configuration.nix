@@ -65,6 +65,7 @@
         docker-compose
         usbutils
       ];
+      shell = pkgs.fish;
     };
     users.nginx.extraGroups = [ "acme" "turnserver" ];
   };
@@ -134,6 +135,8 @@
   #   enableSSHSupport = true;
   # };
   programs.ssh.startAgent = true;
+
+  programs.fish.enable = true;
 
   # List services that you want to enable:
 

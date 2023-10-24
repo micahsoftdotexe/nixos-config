@@ -3,3 +3,4 @@ env-vars.nix
 server/config/
 server/metadata/
 server/.lego/
+server/modules/containers/couchdb.ini.old

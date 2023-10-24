@@ -26,7 +26,8 @@
       desktop = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./desktop/configuration.nix
+          vscode-server.nixosModules.default
+	  ./desktop/configuration.nix
           # ./hardware-configuration.nix
           home-manager.nixosModules.home-manager
           {

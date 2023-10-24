@@ -33,8 +33,8 @@ in
 			telegram-desktop wireshark ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
 			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu
 			eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
-   	 	inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww
-			ark 
+   	 	inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww minetest
+			ark qpwgraph zrythm lyrebird gitui qgit obsidian
 		
 		];
 		file."colors.txt".text = ''

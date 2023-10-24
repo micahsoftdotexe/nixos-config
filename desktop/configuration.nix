@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, modulesPath, inputs, nix-colors, ... }:
+{ config, pkgs, lib, modulesPath, inputs, nix-colors, vscode-server, ... }:
 
 {
   imports =
@@ -28,8 +28,9 @@
         efiSysMountPoint = "/boot/efi";
       };
     };
-    kernelModules = [ "i2c-dev" "i2c-piix4"];
+    kernelModules = [ "i2c-dev" "i2c-piix4" "uinput"];
   };
+  hardware.opengl.driSupport32Bit = true;
 
   # age = {
   #   secrets = {
@@ -50,23 +51,25 @@
 
   # Enable networking
   nixpkgs.config.permittedInsecurePackages = [
-    "electron-12.2.3"
+    "electron-19.1.9"
   ];
   networking = {
     nameservers = [ "194.242.2.2" ];
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      interfaces."tailscale0".allowedTCPPorts = [ 22 80 7777 ];
-      interfaces."tailscale0".allowedUDPPorts = [ 7777 ];
+      interfaces."tailscale0".allowedTCPPorts = [ 22 80 7777 48010 ];
+      interfaces."tailscale0".allowedUDPPorts = [ 7777 47998 48000];
       allowedTCPPortRanges = [ 
         { from = 1714; to = 1764; } # KDE Connect
         { from = 23756; to = 23756; }
         { from = 25565; to = 25565; }
+        { from = 47984; to = 47990; }
       ];  
       allowedUDPPortRanges = [ 
         { from = 1714; to = 1764; } # KDE Connect
         { from = 23756; to = 23756; }
+        {from = 47998; to = 48000;}
       ];
     };
   };
@@ -105,6 +108,9 @@
     wantedBy = [ "multi-user.target" ];
   };
   services = {
+    udev.extraRules = ''
+     KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
+    '';
   	xserver = {
       enable = true;
       layout = "us";
@@ -113,6 +119,7 @@
       excludePackages = [ pkgs.xterm ];
       # desktopManager.gnome.enable = true;
     };
+    vscode-server.enable = true;
     gvfs.enable = true;
     mpd.enable = true;
     printing.enable = true;
@@ -147,13 +154,12 @@
 
   users.users.micaht = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "docker" "qemu-libvirtd" "libvirtd" "adbusers" ];
+    extraGroups = [ "networkmanager" "input" "wheel" "docker" "qemu-libvirtd" "libvirtd" "adbusers" ];
     packages = with pkgs; [
       qjackctl
     ];
     shell = pkgs.fish;
   };
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -184,8 +190,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    sunshine
+    libva
+    libva-utils
     any-nix-shell
-    carla
     firefox
     git
     mullvad-vpn
@@ -200,14 +208,19 @@
     libguestfs-with-appliance
     lm_sensors
     gnome.gnome-disk-utility
-    (python3.withPackages(ps: with ps; [ pygobject3 ]))
     pkg-config
+    epkowa
     gparted
     polkit-kde-agent
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     direnv
   ];
-
+   security.wrappers.sunshine = {
+      owner = "root";
+      group = "root";
+      capabilities = "cap_sys_admin+p";
+      source = "${pkgs.sunshine}/bin/sunshine";
+    };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

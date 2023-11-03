@@ -51,7 +51,9 @@
 
   # Enable networking
   nixpkgs.config.permittedInsecurePackages = [
+    "electron-24.8.6"
     "electron-19.1.9"
+    "electron-22.3.27"
   ];
   networking = {
     nameservers = [ "194.242.2.2" ];
@@ -79,6 +81,7 @@
   fonts.packages = with pkgs; [
     material-design-icons
     jetbrains-mono
+    (nerdfonts.override { fonts = ["JetBrainsMono"];})
   ];
 
 
@@ -190,6 +193,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    appimage-run
     sunshine
     libva
     libva-utils
@@ -214,6 +218,9 @@
     polkit-kde-agent
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     direnv
+    #fish plugins
+    fishPlugins.pure
+
   ];
    security.wrappers.sunshine = {
       owner = "root";

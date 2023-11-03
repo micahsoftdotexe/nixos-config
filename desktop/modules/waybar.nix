@@ -2,9 +2,9 @@
 {
   programs.waybar = {
 			enable = true;
-			package = inputs.waybar.packages.${pkgs.system}.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
+			# package = inputs.waybar.packages.${pkgs.system}.waybar.overrideAttrs (oldAttrs: {
+      #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      # });
 			settings = [
 				{
           layer= "top";

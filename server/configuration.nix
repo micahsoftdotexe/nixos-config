@@ -11,11 +11,13 @@
       "${inputs.micahpkgs}/nixos/modules/services/audio/navidrome.nix"
       ./hardware-configuration.nix
       ./modules/containers/containers.nix
+      # ./modules/containers/immich.nix
       ./modules/services/coturn.nix
       ./modules/services/nginx.nix
       ./modules/services/matrix.nix
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
+      ./modules/services/nextcloud.nix
       
     ];
 
@@ -44,6 +46,17 @@
       liveSync_couch = {
         file = ../secrets/liveSync/couchdb.ini.age;
       };
+      immich_env = {
+        file = ../secrets/immich/immich.env.age;
+      };
+      nextcloud_pass = {
+        file = ../secrets/nextcloud/nextcloud-pass.age;
+        owner = "nextcloud";
+      };
+      nextcloud_database_pass = {
+        file = ../secrets/nextcloud/nextcloud-database-pass.age;
+        owner = "nextcloud";
+      };
     };
     identityPaths = ["/home/micaht/.ssh/micaht" "/etc/ssh/micahtronserver"];
   };
@@ -65,6 +78,7 @@
         docker-compose
         usbutils
       ];
+      shell = pkgs.fish;
     };
     users.nginx.extraGroups = [ "acme" "turnserver" ];
   };
@@ -134,6 +148,8 @@
   #   enableSSHSupport = true;
   # };
   programs.ssh.startAgent = true;
+
+  programs.fish.enable = true;
 
   # List services that you want to enable:
 

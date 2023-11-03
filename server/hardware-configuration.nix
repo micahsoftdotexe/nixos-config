@@ -9,6 +9,10 @@
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
+  boot.zfs.extraPools = [ "disk0" ];
+  networking.hostId = "d71d29dc";
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -23,10 +27,10 @@
       fsType = "vfat";
     };
 
-  fileSystems."/disk0" =
-    { device = "/dev/disk/by-uuid/c1522a32-fdf8-48b0-906c-7944aa4fec00";
-      fsType = "xfs";
-    };
+  # fileSystems."/disk0" =
+  #   { device = "/dev/disk/by-uuid/c1522a32-fdf8-48b0-906c-7944aa4fec00";
+  #     fsType = "xfs";
+  #   };
 
   fileSystems."/disk1" =
     { device = "/dev/disk/by-uuid/3cf3bd1e-7e31-4fec-b439-be2d93239d0a";

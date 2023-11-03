@@ -52,6 +52,14 @@
             proxyWebsockets = true;
           };
         };
+        "photos.micahsoft.net" = {
+          useACMEHost = "micahsoft.net";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8081";
+            proxyWebsockets = true;
+          };
+        };
       };
     };
 }

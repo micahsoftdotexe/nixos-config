@@ -31,10 +31,10 @@ in
 		packages = with pkgs; [audacity etcher gitkraken keepassxc slack musescore 
 			spotify kdeconnect lutris cpu-x vlc vivaldi wget neofetch
 			telegram-desktop wireshark ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
-			pidgin scummvm docker-compose insomnia gimp freetube webcord woeusb-ng yuzu
+			scummvm docker-compose insomnia gimp freetube webcord woeusb-ng yuzu
 			eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
 			inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww minetest
-			ark qpwgraph zrythm obsidian waydroid wl-clipboard ripgrep	
+			ark qpwgraph zrythm obsidian waydroid wl-clipboard ripgrep git-cola jellyfin-media-player chromium gnome.nautilus
 		];
 		file."colors.txt".text = ''
 		#${config.colorScheme.colors.base00}

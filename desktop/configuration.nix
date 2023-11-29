@@ -58,25 +58,28 @@
   networking = {
     nameservers = [ "194.242.2.2" ];
     networkmanager.enable = true;
-    firewall = {
-      enable = true;
-      interfaces."tailscale0".allowedTCPPorts = [ 22 80 7777 48010 ];
-      interfaces."tailscale0".allowedUDPPorts = [ 7777 47998 48000];
-      allowedTCPPortRanges = [ 
-        { from = 1714; to = 1764; } # KDE Connect
-        { from = 23756; to = 23756; }
-        { from = 25565; to = 25565; }
-        { from = 47984; to = 47990; }
-      ];  
-      allowedUDPPortRanges = [ 
-        { from = 1714; to = 1764; } # KDE Connect
-        { from = 23756; to = 23756; }
-        {from = 47998; to = 48000;}
-      ];
-    };
+  #   firewall = {
+  #     enable = true;
+  #     interfaces."tailscale0".allowedTCPPorts = [ 22 80 7777 48010 ];
+  #     interfaces."tailscale0".allowedUDPPorts = [ 7777 47998 48000];
+  #     allowedTCPPortRanges = [ 
+  #       { from = 1714; to = 1764; } # KDE Connect
+  #       { from = 23756; to = 23756; }
+  #       { from = 25565; to = 25565; }
+  #       { from = 47984; to = 47990; }
+  #     ];  
+  #     allowedUDPPorts = [
+  #       7777
+  #     ];
+  #     allowedUDPPortRanges = [ 
+  #       { from = 1714; to = 1764; } # KDE Connect
+  #       { from = 23756; to = 23756; }
+  #       {from = 47998; to = 48000;}
+  #     ];
+  #   };
   };
 
-  
+
 
   fonts.packages = with pkgs; [
     material-design-icons
@@ -121,6 +124,10 @@
       displayManager.gdm.enable = true;
       excludePackages = [ pkgs.xterm ];
       # desktopManager.gnome.enable = true;
+      desktopManager = {
+          xterm.enable = false;
+          xfce.enable = true;
+      };
     };
     vscode-server.enable = true;
     gvfs.enable = true;
@@ -199,7 +206,7 @@
     libva-utils
     any-nix-shell
     firefox
-    git
+    gitFull
     mullvad-vpn
     unrar
     tailscale

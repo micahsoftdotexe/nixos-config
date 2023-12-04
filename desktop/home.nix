@@ -34,7 +34,7 @@ in
 			scummvm docker-compose insomnia gimp freetube webcord woeusb-ng yuzu
 			eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
 			inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww minetest
-			ark qpwgraph zrythm obsidian waydroid wl-clipboard ripgrep git-cola jellyfin-media-player chromium gnome.nautilus
+			ark qpwgraph zrythm obsidian waydroid wl-clipboard ripgrep git-cola jellyfin-media-player chromium gnome.nautilus flightgear
 		];
 		file."colors.txt".text = ''
 		#${config.colorScheme.colors.base00}

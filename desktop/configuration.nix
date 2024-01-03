@@ -54,29 +54,30 @@
     "electron-24.8.6"
     "electron-19.1.9"
     "electron-22.3.27"
+    "electron-25.9.0"
   ];
   networking = {
     nameservers = [ "194.242.2.2" ];
     networkmanager.enable = true;
-  #   firewall = {
-  #     enable = true;
-  #     interfaces."tailscale0".allowedTCPPorts = [ 22 80 7777 48010 ];
-  #     interfaces."tailscale0".allowedUDPPorts = [ 7777 47998 48000];
-  #     allowedTCPPortRanges = [ 
-  #       { from = 1714; to = 1764; } # KDE Connect
-  #       { from = 23756; to = 23756; }
-  #       { from = 25565; to = 25565; }
-  #       { from = 47984; to = 47990; }
-  #     ];  
-  #     allowedUDPPorts = [
-  #       7777
-  #     ];
-  #     allowedUDPPortRanges = [ 
-  #       { from = 1714; to = 1764; } # KDE Connect
-  #       { from = 23756; to = 23756; }
-  #       {from = 47998; to = 48000;}
-  #     ];
-  #   };
+    firewall = {
+      enable = true;
+      interfaces."tailscale0".allowedTCPPorts = [ 22 80 7777 48010 ];
+      interfaces."tailscale0".allowedUDPPorts = [ 7777 47998 48000];
+      allowedTCPPortRanges = [ 
+        { from = 1714; to = 1764; } # KDE Connect
+        { from = 23756; to = 23756; }
+        { from = 25565; to = 25565; }
+        { from = 47984; to = 47990; }
+      ];  
+      allowedUDPPorts = [
+        7777
+      ];
+      allowedUDPPortRanges = [ 
+        { from = 1714; to = 1764; } # KDE Connect
+        { from = 23756; to = 23756; }
+        {from = 47998; to = 48000;}
+      ];
+    };
   };
 
 
@@ -125,8 +126,8 @@
       excludePackages = [ pkgs.xterm ];
       # desktopManager.gnome.enable = true;
       desktopManager = {
-          xterm.enable = false;
-          xfce.enable = true;
+        xterm.enable = false;
+        gnome.enable = true;
       };
     };
     vscode-server.enable = true;
@@ -160,7 +161,7 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-  xdg.portal = { enable = true; extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; };
+  #xdg.portal = { enable = true; extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; };
 
   users.users.micaht = {
     isNormalUser = true;
@@ -187,12 +188,17 @@
     };
     adb.enable = true;
     thunar.enable = true;
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    };
+    # hyprland = {
+    #   enable = true;
+    #   xwayland.enable = true;
+    #   portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # };
+    steam = {
+			enable = true;
+			remotePlay.openFirewall = true;
+			dedicatedServer.openFirewall = true;
+		};
   };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

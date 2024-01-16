@@ -28,14 +28,14 @@ in
 	 
 	home = {
 		stateVersion = "23.05";
-		packages = with pkgs; [etcher gitkraken grails keepassxc slack musescore 
-			spotify kdeconnect lutris pixelorama cpu-x vlc vivaldi wget neofetch
+		packages = with pkgs; [audacity etcher gitkraken keepassxc slack musescore 
+			spotify kdeconnect lutris cpu-x vlc vivaldi wget neofetch
 			telegram-desktop wireshark ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
-			pidgin scummvm docker-compose insomnia gimp google-chrome freetube webcord woeusb-ng yuzu
+			scummvm docker-compose insomnia gimp freetube woeusb-ng yuzu
 			eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
-   	 	inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww minetest
-			ark qpwgraph zrythm lyrebird gitui qgit obsidian
-		
+			inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww minetest
+			ark qpwgraph zrythm obsidian waydroid wl-clipboard ripgrep git-cola jellyfin-media-player chromium gnome.nautilus flightgear
+			r2modman gradle minecraft webcord
 		];
 		file."colors.txt".text = ''
 		#${config.colorScheme.colors.base00}
@@ -61,6 +61,7 @@ in
 		kitty = {
 			enable = true;
 			settings = {
+				font_family = "JetBrainsMonoNL Nerd Font";
 				foreground = "#${config.colorScheme.colors.base05}";
 				background = "#${config.colorScheme.colors.base00}";
 				background_opacity = "0.7";
@@ -73,6 +74,9 @@ in
 				ms-vsliveshare.vsliveshare
 				
 			];
+		};
+		neovim = {
+			enable = true;
 		};
 	};
 }

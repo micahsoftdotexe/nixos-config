@@ -2,7 +2,7 @@
 {
     services.nextcloud = {
         enable = true;
-        package = pkgs.nextcloud27;
+        package = pkgs.nextcloud28;
         hostName = "nextcloud.micahsoft.net";
         https = true;
         datadir = "/disk0/nextcloud";
@@ -18,6 +18,7 @@
             notes = config.services.nextcloud.package.packages.apps.notes;
         };
         extraAppsEnable = true;
+        appstoreEnable = true;
     };
 
     services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {

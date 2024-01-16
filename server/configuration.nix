@@ -129,8 +129,17 @@
       # permitCertUid = "caddy";
     };
   };
-
-  virtualisation.docker.enable = true;   
+  virtualisation = {
+    docker.enable = true;
+    podman = {
+      enable = true;
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+      };
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

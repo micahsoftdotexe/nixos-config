@@ -50,6 +50,12 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-19.1.9"
+    "electron-24.8.6"
+    "electron-25.9.0"
+  ];
+
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -106,6 +112,7 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+     chromium
      git
      go
      virt-manager

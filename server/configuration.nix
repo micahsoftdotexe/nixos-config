@@ -18,6 +18,7 @@
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
       ./modules/services/nextcloud.nix
+      ./modules/services/minecraft.nix
       
     ];
 

@@ -175,6 +175,7 @@
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
+    interfaces."podman+".allowedUDPPorts = [ 53 ];
     allowedTCPPorts = [ 22 80 443 8123 8000 
       5349  # STUN tls
       5350  # STUN tls alt

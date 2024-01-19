@@ -18,6 +18,7 @@
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
       ./modules/services/nextcloud.nix
+      ./modules/containers/minecraft.nix
       
     ];
 
@@ -174,10 +175,15 @@
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
+    interfaces."podman+".allowedUDPPorts = [ 53 ];
     allowedTCPPorts = [ 22 80 443 8123 8000 
       5349  # STUN tls
       5350  # STUN tls alt
       8448
+      25565
+    ];
+    allowedUDPPorts = [
+      25565
     ];
     allowedUDPPortRanges = [
       { from=49152; to=49999; } # TURN relay

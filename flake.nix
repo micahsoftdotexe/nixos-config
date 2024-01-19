@@ -16,6 +16,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     micahpkgs.url = "git+file:///home/micaht/nixpkgs";
+    mms.url = "github:mkaito/nixos-modded-minecraft-servers";
   };
 
   outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, agenix, vscode-server,  ... }:
@@ -27,7 +28,7 @@
         system = "x86_64-linux";
         modules = [
           vscode-server.nixosModules.default
-	  ./desktop/configuration.nix
+	        ./desktop/configuration.nix
           # ./hardware-configuration.nix
           home-manager.nixosModules.home-manager
           {

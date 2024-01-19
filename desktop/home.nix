@@ -36,7 +36,7 @@ in
 			inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww minetest
 			ark qpwgraph obsidian waydroid wl-clipboard ripgrep git-cola jellyfin-media-player chromium gnome.nautilus flightgear
 			r2modman gradle minecraft webcord glaxnimate obs-studio
-			davinci-resolve btop
+			davinci-resolve btop vesktop floorp
 		];
 		file."colors.txt".text = ''
 		#${config.colorScheme.colors.base00}

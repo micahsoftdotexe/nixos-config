@@ -18,7 +18,7 @@
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
       ./modules/services/nextcloud.nix
-      ./modules/services/minecraft.nix
+      ./modules/containers/minecraft.nix
       
     ];
 
@@ -179,6 +179,10 @@
       5349  # STUN tls
       5350  # STUN tls alt
       8448
+      25565
+    ];
+    allowedUDPPorts = [
+      25565
     ];
     allowedUDPPortRanges = [
       { from=49152; to=49999; } # TURN relay

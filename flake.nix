@@ -17,9 +17,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     micahpkgs.url = "git+file:///home/micaht/nixpkgs";
     mms.url = "github:mkaito/nixos-modded-minecraft-servers";
+    nixvim = {
+     url = "github:nix-community/nixvim";
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, agenix, vscode-server,  ... }:
+  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, nixvim,  agenix, vscode-server,  ... }:
     /* ignore:: */ let ignoreme = ({config,lib,...}: with lib; { system.nixos.revision = mkForce null; system.nixos.versionSuffix = mkForce "pre-git"; }); in
   {
     nixosConfigurations = {
@@ -81,7 +85,8 @@
         modules = [
           ./server/configuration.nix
           agenix.nixosModules.default
-	        vscode-server.nixosModules.default
+	  vscode-server.nixosModules.default
+          nixvim.nixosModules.nixvim
         ];
         specialArgs = { inherit inputs; };
       };

@@ -157,10 +157,14 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  programs.ssh.startAgent = true;
-
-  programs.fish.enable = true;
-
+  programs = {
+	fish.enable = true;
+  	ssh.startAgent = true;
+	nixvim = {
+		enable = true;
+		
+	};  
+};
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

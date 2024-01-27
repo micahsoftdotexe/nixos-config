@@ -46,7 +46,6 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
@@ -114,6 +113,14 @@
     '';
     wantedBy = [ "multi-user.target" ];
   };
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    konsole
+  ];
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+  };
   services = {
     udev.extraRules = ''
      KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
@@ -127,7 +134,8 @@
       # desktopManager.gnome.enable = true;
       desktopManager = {
         xterm.enable = false;
-        gnome.enable = true;
+        plasma5.enable = true;
+        # defaultSession = "plasmawayland";
       };
     };
     vscode-server.enable = true;

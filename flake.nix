@@ -7,6 +7,11 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     nur = { url = "github:nix-community/NUR"; };
     home-manager.url = "github:nix-community/home-manager";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -19,7 +24,7 @@
     mms.url = "github:mkaito/nixos-modded-minecraft-servers";
   };
 
-  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, agenix, vscode-server,  ... }:
+  outputs = inputs@{ nixpkgs, nur, home-manager, hyprland, nix-colors, agenix, vscode-server, plasma-manager,  ... }:
     /* ignore:: */ let ignoreme = ({config,lib,...}: with lib; { system.nixos.revision = mkForce null; system.nixos.versionSuffix = mkForce "pre-git"; }); in
   {
     nixosConfigurations = {
@@ -38,7 +43,8 @@
             home-manager.extraSpecialArgs = { inherit nix-colors inputs builtins; };
             
             home-manager.sharedModules = [
-              agenix.homeManagerModules.default
+              plasma-manager.homeManagerModules.plasma-manager
+              # agenix.homeManagerModules.default
               # hyprland.homeManagerModules.default
               # {wayland.windowManager.hyprland.enable = true;}
             ];

@@ -129,7 +129,10 @@
       enable = true;
       layout = "us";
       xkbVariant = "";
-      displayManager.gdm.enable = true;
+      displayManager = {
+        gdm.enable = true;
+        defaultSession = "plasmawayland";
+      };
       excludePackages = [ pkgs.xterm ];
       # desktopManager.gnome.enable = true;
       desktopManager = {
@@ -173,7 +176,7 @@
 
   users.users.micaht = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "input" "wheel" "docker" "qemu-libvirtd" "libvirtd" "adbusers" ];
+    extraGroups = [ "networkmanager" "video" "input" "wheel" "docker" "qemu-libvirtd" "libvirtd" "adbusers" ];
     packages = with pkgs; [
       qjackctl
     ];

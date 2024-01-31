@@ -370,11 +370,10 @@
     },
     "micahpkgs": {
       "locked": {
-        "lastModified": 1694968557,
-        "narHash": "sha256-BrEUn+E6+qOzehb+bANPuRfCivCX6qqRIV7B71jVr2s=",
-        "ref": "refs/heads/update-navidrome",
-        "rev": "8d1c8c5572ac8a505c32a55da22f2e67dd28437a",
-        "revCount": 526567,
+        "dirtyRev": "31b91698cf17103c7c7408a2b1e9cd2eab6a5df2-dirty",
+        "dirtyShortRev": "31b91698cf1-dirty",
+        "lastModified": 1706387052,
+        "narHash": "sha256-2cYG0tc6M8kBRFzywOswrrR9cmp6PS26bTeQDc8GqSs=",
         "type": "git",
         "url": "file:///home/micaht/nixpkgs"
       },

@@ -5,7 +5,7 @@
 		containers.homeassistant = {
 			volumes = [ "/disk1/homeassistant/config:/config" ];
 			environment.TZ = "America/New_York";
-			image = "ghcr.io/home-assistant/home-assistant:2023.12.4"; # Warning: if the tag does not change, the image will not be updated
+			image = "ghcr.io/home-assistant/home-assistant:2024.1.5"; # Warning: if the tag does not change, the image will not be updated
 			extraOptions = [ 
 				"--network=host" 
 				"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware

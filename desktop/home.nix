@@ -34,7 +34,7 @@ in
 			telegram-desktop wireshark ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
 			scummvm docker-compose insomnia gimp freetube woeusb-ng yuzu
 			eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
-			inputs.agenix.packages.${pkgs.system}.default cemu rpcs3 swww minetest
+			inputs.agenix.packages.${pkgs.system}.default rpcs3 swww minetest
 			ark qpwgraph obsidian waydroid wl-clipboard ripgrep git-cola jellyfin-media-player chromium gnome.nautilus flightgear
 			r2modman gradle minecraft webcord glaxnimate obs-studio
 			davinci-resolve btop vesktop floorp libation

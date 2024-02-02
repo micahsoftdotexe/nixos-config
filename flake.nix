@@ -20,7 +20,7 @@
     waybar.url = "github:alexays/waybar";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    micahpkgs.url = "git+file:///home/micaht/nixpkgs";
+    # micahpkgs.url = "git+file:///home/micaht/nixpkgs";
     mms.url = "github:mkaito/nixos-modded-minecraft-servers";
     nixvim = {
      url = "github:nix-community/nixvim";
@@ -91,7 +91,7 @@
         modules = [
           ./server/configuration.nix
           agenix.nixosModules.default
-	  vscode-server.nixosModules.default
+	        vscode-server.nixosModules.default
           nixvim.nixosModules.nixvim
         ];
         specialArgs = { inherit inputs; };

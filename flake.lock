@@ -229,11 +229,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1706955260,
-        "narHash": "sha256-W3y0j77IDVbmbajudHoUr46RpswujUCl+D5Vru53UsI=",
+        "lastModified": 1706985585,
+        "narHash": "sha256-ptshv4qXiC6V0GCfpABz88UGGPNwqs5tAxaRUKbk1Qo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "880d9bc2110f7cae59698f715b8ca42cdc53670c",
+        "rev": "1ca210648a6ca9b957efde5da957f3de6b1f0c45",
         "type": "github"
       },
       "original": {
@@ -272,11 +272,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1706923912,
-        "narHash": "sha256-mcKyIcDnSotAfsP1ucHnowDQFb+ys3dIEQqv9eIQb4I=",
+        "lastModified": 1706985179,
+        "narHash": "sha256-4XX9Hb1lE5YzpCkcQ21+BwBsZ4fvSfJSgAMxiLELuo8=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "504ebe1b373726947a44fa2d6a68498d0edb85b6",
+        "rev": "5d4ff60f535b65dc3db4cd0fb20e44c1f4360769",
         "type": "github"
       },
       "original": {
@@ -366,21 +366,6 @@
         "owner": "kristapsdz",
         "repo": "lowdown",
         "type": "github"
-      }
-    },
-    "micahpkgs": {
-      "locked": {
-        "lastModified": 1699041395,
-        "narHash": "sha256-BrEUn+E6+qOzehb+bANPuRfCivCX6qqRIV7B71jVr2s=",
-        "ref": "refs/heads/update-navidrome",
-        "rev": "13bf0490f457b81326bb46e295951f6612ac650e",
-        "revCount": 526567,
-        "type": "git",
-        "url": "file:///home/micaht/nixpkgs"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:///home/micaht/nixpkgs"
       }
     },
     "mms": {
@@ -701,7 +686,6 @@
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
-        "micahpkgs": "micahpkgs",
         "mms": "mms",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs_5",

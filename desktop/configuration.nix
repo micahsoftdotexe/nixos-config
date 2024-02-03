@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/nvim.nix
       #<home-manager/nixos>
       # ../home-manager/home.nix
     ];
@@ -127,8 +128,10 @@
     '';
   	xserver = {
       enable = true;
-      layout = "us";
-      xkbVariant = "";
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
       displayManager = {
         gdm.enable = true;
         defaultSession = "plasmawayland";

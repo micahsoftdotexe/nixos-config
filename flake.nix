@@ -37,6 +37,7 @@
         system = "x86_64-linux";
         modules = [
           vscode-server.nixosModules.default
+          nixvim.nixosModules.nixvim
 	        ./desktop/configuration.nix
           # ./hardware-configuration.nix
           home-manager.nixosModules.home-manager
@@ -91,7 +92,7 @@
         modules = [
           ./server/configuration.nix
           agenix.nixosModules.default
-	  vscode-server.nixosModules.default
+	        vscode-server.nixosModules.default
           nixvim.nixosModules.nixvim
         ];
         specialArgs = { inherit inputs; };

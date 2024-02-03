@@ -9,7 +9,7 @@ in
     nix-colors.homeManagerModules.default
 		./modules/waybar.nix
 		./modules/wofi.nix
-		./modules/plasma.nix
+		# ./modules/plasma.nix
   ];
 	colorScheme = nix-colors-lib.colorSchemeFromPicture {
     path = ./home-config/wallpapers/pxfuel.jpg;
@@ -37,7 +37,7 @@ in
 			inputs.agenix.packages.${pkgs.system}.default rpcs3 swww minetest
 			ark qpwgraph obsidian waydroid wl-clipboard ripgrep git-cola jellyfin-media-player chromium gnome.nautilus flightgear
 			r2modman gradle minecraft webcord glaxnimate obs-studio
-			davinci-resolve btop vesktop floorp libation
+			davinci-resolve btop vesktop floorp libation spotube
 		];
 		file."colors.txt".text = ''
 		#${config.colorScheme.colors.base00}
@@ -76,9 +76,6 @@ in
 				ms-vsliveshare.vsliveshare
 				
 			];
-		};
-		neovim = {
-			enable = true;
 		};
 	};
 }

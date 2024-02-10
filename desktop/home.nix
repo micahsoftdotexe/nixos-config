@@ -64,8 +64,8 @@ in
 			enable = true;
 			settings = {
 				font_family = "JetBrainsMonoNL Nerd Font";
-				foreground = "#${config.colorScheme.colors.base05}";
-				background = "#${config.colorScheme.colors.base00}";
+				foreground = "#${config.colorScheme.palette.base05}";
+				background = "#${config.colorScheme.palette.base00}";
 				background_opacity = "0.7";
 			};
 		};

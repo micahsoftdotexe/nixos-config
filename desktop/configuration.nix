@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/nvim.nix
+      # ./modules/nvim.nix
       #<home-manager/nixos>
       # ../home-manager/home.nix
     ];
@@ -62,7 +62,7 @@
     firewall = {
       enable = true;
       interfaces."tailscale0".allowedTCPPorts = [ 22 80 7777 48010 ];
-      interfaces."tailscale0".allowedUDPPorts = [ 7777 47998 48000];
+      interfaces."tailscale0".allowedUDPPorts = [ 22 7777 47998 48000];
       allowedTCPPortRanges = [ 
         { from = 1714; to = 1764; } # KDE Connect
         { from = 23756; to = 23756; }
@@ -114,14 +114,14 @@
     '';
     wantedBy = [ "multi-user.target" ];
   };
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    konsole
-  ];
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
-  };
+  # environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+  #   konsole
+  # ];
+  # qt = {
+  #   enable = true;
+  #   platformTheme = "gnome";
+  #   style = "adwaita-dark";
+  # };
   services = {
     udev.extraRules = ''
      KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
@@ -134,13 +134,14 @@
       };
       displayManager = {
         gdm.enable = true;
-        defaultSession = "plasmawayland";
+        # defaultSession = "plasmawayland";
       };
       excludePackages = [ pkgs.xterm ];
       # desktopManager.gnome.enable = true;
       desktopManager = {
         xterm.enable = false;
-        plasma5.enable = true;
+        gnome.enable = true;
+        # plasma5.enable = true;
         # defaultSession = "plasmawayland";
       };
     };
@@ -200,8 +201,11 @@
         any-nix-shell fish --info-right | source
       '';
     };
+    ssh.startAgent = true;
+
     adb.enable = true;
     thunar.enable = true;
+    neovim.enable = true;
     # hyprland = {
     #   enable = true;
     #   xwayland.enable = true;

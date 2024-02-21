@@ -61,7 +61,7 @@
     xkb = {
       layout = "us";
       variant = "";
-    }
+    };
   };
 
   # Enable CUPS to print documents.

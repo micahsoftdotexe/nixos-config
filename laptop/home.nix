@@ -4,7 +4,7 @@
 	
 	home.stateVersion = "23.05";
 	home.packages = with pkgs; [ musescore kdeconnect neofetch heroic vlc insomnia obsidian gittyup zoom-us flightgear
-		floorp atlauncher
+		floorp atlauncher vesktop
 	];
 	programs.vscode = {
 		enable = true;

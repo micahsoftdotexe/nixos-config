@@ -29,7 +29,7 @@ in
 	 
 	home = {
 		stateVersion = "23.05";
-		packages = with pkgs; [audacity etcher gitkraken keepassxc slack 
+		packages = with pkgs; [audacity gitkraken keepassxc slack 
 			spotify kdeconnect lutris cpu-x vlc vivaldi wget neofetch
 			telegram-desktop wireshark ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
 			scummvm docker-compose insomnia gimp freetube woeusb-ng

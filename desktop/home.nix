@@ -12,7 +12,7 @@ in
 		# ./modules/plasma.nix
   ];
 	colorScheme = nix-colors-lib.colorSchemeFromPicture {
-    path = ./home-config/wallpapers/pxfuel.jpg;
+    path = ./home-config/wallpapers/pastel_sky.jpg;
     kind = "dark";
   };
 	nixpkgs.config.allowUnfree = true;
@@ -29,15 +29,15 @@ in
 	 
 	home = {
 		stateVersion = "23.05";
-		packages = with pkgs; [audacity etcher gitkraken keepassxc slack musescore 
+		packages = with pkgs; [audacity etcher gitkraken keepassxc slack 
 			spotify kdeconnect lutris cpu-x vlc vivaldi wget neofetch
 			telegram-desktop wireshark ardour jetbrains-toolbox heroic pkgs.nur.repos.jakobrs.bobrossquotes
-			scummvm docker-compose insomnia gimp freetube woeusb-ng yuzu
-			eww-wayland acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
+			scummvm docker-compose insomnia gimp freetube woeusb-ng
+			eww acpi mpc-cli pavucontrol hyprpicker dunst pulsemixer cava playerctl pamixer
 			inputs.agenix.packages.${pkgs.system}.default rpcs3 swww minetest
 			ark qpwgraph obsidian waydroid wl-clipboard ripgrep git-cola jellyfin-media-player chromium gnome.nautilus flightgear
 			r2modman gradle minecraft webcord glaxnimate obs-studio
-			davinci-resolve btop vesktop floorp libation spotube
+			davinci-resolve btop vesktop floorp libation spotube ollama
 		];
 		file."colors.txt".text = ''
 		#${config.colorScheme.palette.base00}

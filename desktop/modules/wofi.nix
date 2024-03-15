@@ -9,7 +9,7 @@
 				window {
 						margin: 2px;
 						border: 0px solid;
-						background-color: #${config.colorScheme.colors.base00};
+						background-color: #${config.colorScheme.palette.base00};
 						border-radius: 8px;
 				}
 
@@ -17,7 +17,7 @@
 						padding: 4px;
 						margin: 4px;
 						border: none;
-						background-color: #${config.colorScheme.colors.base09};
+						background-color: #${config.colorScheme.palette.base09};
 						outline: none;
 				}
 
@@ -42,7 +42,7 @@
 				}
 
 				#text:selected {
-						color: #${config.colorScheme.colors.base05};
+						color: #${config.colorScheme.palette.base05};
 						margin: 0px 0px;
 						border: none;
 						border-radius: 8px;
@@ -59,7 +59,7 @@
 						margin: 0px 0px;
 						border: none;
 						border-radius: 8px;
-					  background-color: #${config.colorScheme.colors.base0D};
+					  background-color: #${config.colorScheme.palette.base0D};
 				}
 			'';
   };

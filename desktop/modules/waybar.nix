@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, nur, inputs, nix-colors, ... }:
+{ config, lib, pkgs, modulesPath, nur, inputs, nix-palette, ... }:
 {
   programs.waybar = {
 			enable = true;
@@ -150,15 +150,15 @@
           font-weight: bolder;
         }
         window#waybar {
-          background: alpha(#${config.colorScheme.colors.base0B}, 0.25);
+          background: alpha(#${config.colorScheme.palette.base0B}, 0.25);
           
           border-radius: 10px;
         }
         #workspaces,
         #cava {
           border-radius: 10px;
-          background-color: alpha(#${config.colorScheme.colors.base0B}, 0.50);
-          color: #${config.colorScheme.colors.base0C};
+          background-color: alpha(#${config.colorScheme.palette.base0B}, 0.50);
+          color: #${config.colorScheme.palette.base0C};
           margin-top: 5px;
           margin-left: 5px;
           margin-bottom: 5px;
@@ -173,7 +173,7 @@
           padding-right: 3px;
           background: transparent;
           background-color: transparent;
-          color: #${config.colorScheme.colors.base0C};
+          color: #${config.colorScheme.palette.base0C};
           border: 0px;
         }
 
@@ -182,8 +182,8 @@
         #disk,
         #custom-notification {
           border-radius: 10px;
-          background-color: alpha(#${config.colorScheme.colors.base0B}, 0.50);;
-          background-color: alpha(#${config.colorScheme.colors.base0B}, 0.50);;
+          background-color: alpha(#${config.colorScheme.palette.base0B}, 0.50);;
+          background-color: alpha(#${config.colorScheme.palette.base0B}, 0.50);;
           margin-top: 5px;
           margin-bottom: 8px;
           padding-left: 5px;
@@ -220,8 +220,8 @@
         #network,
         #custom-weather {
           border-radius: 10px;
-          background-color: alpha(#${config.colorScheme.colors.base0B}, 0.50);
-          background-color: alpha(#${config.colorScheme.colors.base0B}, 0.50);
+          background-color: alpha(#${config.colorScheme.palette.base0B}, 0.50);
+          background-color: alpha(#${config.colorScheme.palette.base0B}, 0.50);
           margin-top: 5px;
           margin-bottom: 8px;
           padding-left: 10px;
@@ -247,7 +247,7 @@
         #custom-spotify {
           border-radius: 10px;
           margin-left: 5px;
-          background-color: alpha(#${config.colorScheme.colors.base0B}, 0.50);
+          background-color: alpha(#${config.colorScheme.palette.base0B}, 0.50);
           margin-top: 5px;
           margin-bottom: 5px;
           padding-left: 10px;

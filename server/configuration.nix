@@ -83,6 +83,7 @@
     };
     users.nginx.extraGroups = [ "acme" "turnserver" ];
   };
+  services.smartd.enable = true;
 
   security.acme = {
     acceptTerms = true;

@@ -17,7 +17,7 @@
       ./modules/services/matrix.nix
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
-      ./modules/services/nextcloud.nix
+      #./modules/services/nextcloud.nix
       ./modules/containers/minecraft.nix
       
     ];

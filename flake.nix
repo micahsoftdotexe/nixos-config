@@ -2,7 +2,7 @@
   description = "An example NixOS configuration";
 
   inputs = {
-    nixpkgs = { url = "github:NixOS/nixpkgs/staging-next"; };
+    nixpkgs = { url = "nixpkgs/nixos-unstable"; };
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";

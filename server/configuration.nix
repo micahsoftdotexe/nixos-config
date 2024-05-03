@@ -11,14 +11,13 @@
       # "${inputs.micahpkgs}/nixos/modules/services/audio/navidrome.nix"
       ./hardware-configuration.nix
       ./modules/containers/containers.nix
-      # ./modules/containers/immich.nix
+      ./modules/containers/immich.nix
       ./modules/services/coturn.nix
       ./modules/services/nginx.nix
       ./modules/services/matrix.nix
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
-      #./modules/services/nextcloud.nix
-      ./modules/containers/minecraft.nix
+      #./modules/containers/minecraft.nix
       
     ];
 
@@ -50,14 +49,17 @@
       immich_env = {
         file = ../secrets/immich/immich.env.age;
       };
-      nextcloud_pass = {
-        file = ../secrets/nextcloud/nextcloud-pass.age;
-        owner = "nextcloud";
+      immichdb_env = {
+        file = ../secrets/immich/immichdb.env.age;
       };
-      nextcloud_database_pass = {
-        file = ../secrets/nextcloud/nextcloud-database-pass.age;
-        owner = "nextcloud";
-      };
+      # nextcloud_pass = {
+      #   file = ../secrets/nextcloud/nextcloud-pass.age;
+      #   owner = "nextcloud";
+      # };
+      # nextcloud_database_pass = {
+      #   file = ../secrets/nextcloud/nextcloud-database-pass.age;
+      #   owner = "nextcloud";
+      # };
     };
     identityPaths = ["/home/micaht/.ssh/micaht" "/etc/ssh/micahtronserver"];
   };
@@ -81,6 +83,14 @@
       ];
       shell = pkgs.fish;
     };
+    users.photoprism = {
+      home = "/disk0/photoprism";
+      isSystemUser = true;
+      #isNormalUser = true;
+      group = "photoprism";
+      description = "photoprism service user";
+    };
+    groups.photoprism = { };
     users.nginx.extraGroups = [ "acme" "turnserver" ];
   };
   services.smartd.enable = true;
@@ -92,7 +102,7 @@
       domain = "*.micahsoft.net";
       # extraDomainNames = [ "*.micahsoft.net" ];
       dnsProvider = "cloudflare";
-      dnsPropagationCheck = false;
+      dnsPropagationCheck = true;
       dnsResolver = "1.1.1.1:53";
       credentialsFile = "/disk1/credentials.secret";
     };

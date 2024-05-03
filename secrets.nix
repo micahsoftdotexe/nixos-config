@@ -20,6 +20,7 @@ in
   "secrets/liveSync/livesync.env.age".publicKeys = [micaht micahtronserver];
   "secrets/liveSync/couchdb.ini.age".publicKeys = [micaht micahtronserver];
   "secrets/immich/immich.env.age".publicKeys = [micaht micahtronserver];
-  "secrets/nextcloud/nextcloud-pass.age".publicKeys = [micaht micahtronserver];
-  "secrets/nextcloud/nextcloud-database-pass.age".publicKeys = [micaht micahtronserver];
+  "secrets/immich/immichdb.env.age".publicKeys = [micaht micahtronserver];
+  # "secrets/nextcloud/nextcloud-pass.age".publicKeys = [micaht micahtronserver];
+  # "secrets/nextcloud/nextcloud-database-pass.age".publicKeys = [micaht micahtronserver];
 }

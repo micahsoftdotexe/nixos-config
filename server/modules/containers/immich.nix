@@ -22,16 +22,33 @@ in {
   # - create an admin user by accessing the site
   # - login with the admin user
   # - set the "Machine Learning Settings" > "URL" to http://immich_machine_learning:3003
-
+  systemd.services.init-filerun-network-and-files = {
+    description = "Create the network bridge for Immich.";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    
+    serviceConfig.Type = "oneshot";
+    script = let dockercli = "${config.virtualisation.docker.package}/bin/docker";
+            in ''
+              # immich-net network
+              check=$(${dockercli} network ls | grep "immich-net" || true)
+              if [ -z "$check" ]; then
+                ${dockercli} network create immich-net
+              else
+                echo "immich-net already exists in docker"
+              fi
+            '';
+  };
   virtualisation.oci-containers.containers.immich_server = {
     image = "ghcr.io/immich-app/immich-server:${immichVersion}";
     ports = ["127.0.0.1:2283:3001"];
     extraOptions = [
-      "--pull=newer"
+      "--network=immich-net"
+      "--pull=always"
       # Force DNS resolution to only be the podman dnsname name server; by default podman provides a resolv.conf
       # that includes both this server and the upstream system server, causing resolutions of other pod names
       # to be inconsistent.
-      "--dns=10.88.0.1"
+      #"--dns=10.88.0.1"
     ];
     cmd = [ "start.sh" "immich" ];
     environment = {
@@ -50,11 +67,12 @@ in {
   virtualisation.oci-containers.containers.immich_microservices = {
     image = "ghcr.io/immich-app/immich-server:${immichVersion}";
     extraOptions = [
-      "--pull=newer"
+      "--network=immich-net"
+      "--pull=always"
       # Force DNS resolution to only be the podman dnsname name server; by default podman provides a resolv.conf
       # that includes both this server and the upstream system server, causing resolutions of other pod names
       # to be inconsistent.
-      "--dns=10.88.0.1"
+      #"--dns=10.88.0.1"
     ];
     cmd = [ "start.sh" "microservices" ];
     environment = {
@@ -72,7 +90,7 @@ in {
 
   virtualisation.oci-containers.containers.immich_machine_learning = {
     image = "ghcr.io/immich-app/immich-machine-learning:${immichVersion}";
-    extraOptions = ["--pull=newer"];
+    extraOptions = ["--pull=always" "--network=immich-net"];
     environment = {
       IMMICH_VERSION = immichVersion;
     };
@@ -83,10 +101,12 @@ in {
 
   virtualisation.oci-containers.containers.immich_redis = {
     image = "registry.hub.docker.com/library/redis:6.2-alpine@sha256:84882e87b54734154586e5f8abd4dce69fe7311315e2fc6d67c29614c8de2672";
+    extraOptions = [ "--network=immich-net" ];
   };
 
   virtualisation.oci-containers.containers.immich_postgres = {
     image = "registry.hub.docker.com/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0";
+    extraOptions = [ "--network=immich-net" ]; 
     environmentFiles = [
 			config.age.secrets.immichdb_env.path
 		];

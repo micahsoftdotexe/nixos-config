@@ -17,7 +17,7 @@
       ./modules/services/matrix.nix
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
-      #./modules/containers/minecraft.nix
+      ./modules/containers/pihole.nix
       
     ];
 
@@ -143,14 +143,14 @@
   };
   virtualisation = {
     docker.enable = true;
-    podman = {
-      enable = true;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-      };
-      defaultNetwork.settings.dns_enabled = true;
-    };
+    #podman = {
+    #  enable = true;
+    #  autoPrune = {
+    #    enable = true;
+    #    dates = "weekly";
+    #  };
+    #  defaultNetwork.settings.dns_enabled = true;
+    #};
   };
 
   # List packages installed in system profile. To search, run:
@@ -190,7 +190,7 @@
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
-    interfaces."podman+".allowedUDPPorts = [ 53 ];
+    # interfaces."podman+".allowedUDPPorts = [ 53 ];
     allowedTCPPorts = [ 22 80 443 8123 8000 
       5349  # STUN tls
       5350  # STUN tls alt

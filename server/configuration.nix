@@ -108,7 +108,7 @@
     };
     certs.${config.services.coturn.realm} = {
       dnsProvider = "cloudflare";
-      dnsPropagationCheck = false;
+      dnsPropagationCheck = true;
       dnsResolver = "1.1.1.1:53";
       credentialsFile = "/disk1/credentials.secret";
       postRun = "systemctl restart coturn.service";

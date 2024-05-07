@@ -23,7 +23,7 @@ in {
   # - login with the admin user
   # - set the "Machine Learning Settings" > "URL" to http://immich_machine_learning:3003
   systemd.services.init-filerun-network-and-files = {
-    description = "Create the network bridge for Immich.";
+    description = "Create the network bridge for Immich..";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     

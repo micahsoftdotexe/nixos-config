@@ -52,11 +52,11 @@
             proxyWebsockets = true;
           };
         };
-        # "photos.micahsoft.net" = {
+        # "radicale.micahsoft.net" = {
         #   useACMEHost = "micahsoft.net";
         #   forceSSL = true;
         #   locations."/" = {
-        #     proxyPass = "http://127.0.0.1:2342";
+        #     proxyPass = "http://127.0.0.1:5232";
         #     proxyWebsockets = true;
         #   };
         # };

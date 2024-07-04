@@ -12,7 +12,7 @@
 			];
 		};
 		containers.audiobookshelf = {
-			image = "ghcr.io/advplyr/audiobookshelf:2.9.0";
+			image = "ghcr.io/advplyr/audiobookshelf:2.10.1";
 			ports = ["8001:80"];
 			volumes = [ "/disk1/audiobooks/books:/audiobooks" "/disk1/audiobooks/metadata:/metadata" "/disk1/audiobooks/config:/config" ];
 		};

@@ -15,10 +15,11 @@
       ./modules/services/coturn.nix
       ./modules/services/nginx.nix
       ./modules/services/matrix.nix
+      ./modules/services/radicale.nix
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
       ./modules/containers/pihole.nix
-      
+      ./modules/containers/gluetun.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -52,6 +53,13 @@
       immichdb_env = {
         file = ../secrets/immich/immichdb.env.age;
       };
+      radicale = {
+        file = ../secrets/radicale/htpasswd.age;
+        owner = "radicale";
+      };
+      gluetun = {
+        file = ../secrets/gluetun/gluetun.age;
+      };
       # nextcloud_pass = {
       #   file = ../secrets/nextcloud/nextcloud-pass.age;
       #   owner = "nextcloud";
@@ -74,23 +82,25 @@
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
+    groups = {
+      media = {
+        gid = 789;
+      };
+    };
     users.micaht = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "docker" "media" ]; # Enable ‘sudo’ for the user.
       packages = with pkgs; [
         docker-compose
         usbutils
       ];
       shell = pkgs.fish;
     };
-    users.photoprism = {
-      home = "/disk0/photoprism";
-      isSystemUser = true;
-      #isNormalUser = true;
-      group = "photoprism";
-      description = "photoprism service user";
+    users.media = {
+      isNormalUser = false;
+      uid = 789;
+      group = "media";
     };
-    groups.photoprism = { };
     users.nginx.extraGroups = [ "acme" "turnserver" ];
   };
   services.smartd.enable = true;
@@ -128,7 +138,12 @@
     vscode-server.enable = true;
     
     #jellyfin
-    jellyfin.enable = true;
+    jellyfin = {
+      enable = true;
+      user = "media";
+      group = "media";
+
+    };
     vaultwarden = {
       enable = true;
       config = {
@@ -170,11 +185,8 @@
   # };
   programs = {
 	fish.enable = true;
-  	ssh.startAgent = true;
-	nixvim = {
-		enable = true;
-		
-	};  
+  ssh.startAgent = true;
+	neovim.enable = true;
 };
   # List services that you want to enable:
 
@@ -191,11 +203,19 @@
   networking.firewall = {
     enable = true;
     # interfaces."podman+".allowedUDPPorts = [ 53 ];
+    interfaces."tailscale0".allowedTCPPorts = [ 5232 ];
+    interfaces."tailscale0".allowedUDPPorts = [ 5232 ];
     allowedTCPPorts = [ 22 80 443 8123 8000 
       5349  # STUN tls
       5350  # STUN tls alt
       8448
       25565
+      5055
+      8888
+      8889
+      9696
+      8989
+      5055
     ];
     allowedUDPPorts = [
       25565

@@ -95,11 +95,9 @@
     description = "Micah Tanner";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-      firefox
       tailscale
       vscode
       telegram-desktop
-      gitkraken
       #fprintd
     #  thunderbird
     ];

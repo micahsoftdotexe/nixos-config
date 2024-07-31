@@ -13,7 +13,7 @@
   ];
 
   virtualisation.oci-containers.containers.pihole = {
-    image = "pihole/pihole:2024.05.0";
+    image = "pihole/pihole:2024.07.0";
     volumes = [
       "pihole:/etc/pihole"
       "dnsmasq:/etc/dnsmasq.d"
@@ -28,6 +28,8 @@
     # ];
     environment = {
       TZ = "America/Chicago";
+      PIHOLE_DNS_1 = "9.9.9.9";
+      PIHOLE_DNS_2 = "149.112.112.112";
     };
   };
 }

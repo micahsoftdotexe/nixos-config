@@ -6,6 +6,7 @@
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
+      clientMaxBodySize = "2G";
       virtualHosts = {
         "audiobooks.micahsoft.net" = {
           useACMEHost = "micahsoft.net";
@@ -33,17 +34,17 @@
             proxyPass = "http://127.0.0.1:8000";
           };
         };
-        "turn.micahsoft.net" = {
-          useACMEHost = config.services.coturn.realm;
-          forceSSL = true;
-        };
-        "matrix.micahsoft.net" = {
-          useACMEHost = "micahsoft.net";
-          forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8008";
-          };
-        };
+        # "turn.micahsoft.net" = {
+        #   useACMEHost = config.services.coturn.realm;
+        #   forceSSL = true;
+        # };
+        # "matrix.micahsoft.net" = {
+        #   useACMEHost = "micahsoft.net";
+        #   forceSSL = true;
+        #   locations."/" = {
+        #     proxyPass = "http://127.0.0.1:8008";
+        #   };
+        # };
         "notes.micahsoft.net" = {
           useACMEHost = "micahsoft.net";
           forceSSL = true;

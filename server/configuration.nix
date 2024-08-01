@@ -19,6 +19,7 @@
       ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
       ./modules/containers/pihole.nix
+      # ./modules/containers/minecraft.nix
       ./modules/containers/gluetun.nix
     ];
 
@@ -59,6 +60,9 @@
       };
       gluetun = {
         file = ../secrets/gluetun/gluetun.age;
+      };
+      minecraft = {
+        file = ../secrets/minecraft/minecraft.age;
       };
       # nextcloud_pass = {
       #   file = ../secrets/nextcloud/nextcloud-pass.age;

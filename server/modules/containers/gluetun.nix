@@ -5,12 +5,16 @@ let
   radarr = "7878:7878";
   sonarr = "8989:8989";
   jellyseerr = "5055:5055";
+  readarr = "8787:8787";
+  flaresolverr = "8191:8191";
   media = "/disk0/media_data";
   qbittorentConfig = "/disk1/media/qbittorrent";
   jellyseerrConfig = "/disk1/media/jellyseerr";
   prowlarrConfig = "/disk1/media/prowlarr";
   sonarrConfig = "/disk1/media/sonarr";
   radarrConfig = "/disk1/media/radarr";
+  readarrConfig = "/disk1/media/readarr";
+  flaresolverrConfig = "/disk1/media/flaresolverr";
 
 
 in {
@@ -48,8 +52,11 @@ in {
       radarr
       sonarr
       jellyseerr
+      readarr
+      # flaresolverr
     ];
     extraOptions = [
+      # "--restart=on-failure"
       "--network=gluetun-net"
       "--pull=always"
       "--cap-add=NET_ADMIN"
@@ -63,6 +70,7 @@ in {
       "${qbittorentConfig}:/config"
       "${media}/downloads:/data"
     ];
+    dependsOn = [ "gluetun" ];
     environment = {
       PUID = "789";
       PGID = "789";
@@ -73,6 +81,7 @@ in {
       TP_THEME = "nord";
     };
     extraOptions = [
+      # "--restart=on-failure"
       "--network=container:gluetun"
       "--pull=always"
     ];
@@ -82,6 +91,7 @@ in {
     volumes = [
       "${jellyseerrConfig}:/app/config"
     ];
+    dependsOn = [ "gluetun" ];
     environment = {
       PUID = "789";
       PGID = "789";
@@ -89,6 +99,7 @@ in {
       TZ = "America/Detroit";
     };
     extraOptions = [
+      # "--restart=on-failure"
       "--network=container:gluetun"
       "--pull=always"
     ];
@@ -98,6 +109,7 @@ in {
     volumes = [
       "${prowlarrConfig}:/config"
     ];
+    dependsOn = [ "gluetun" ];
     environment = {
       PUID = "789";
       PGID = "789";
@@ -108,6 +120,7 @@ in {
       TP_THEME = "nord";
     };
     extraOptions = [
+      # "--restart on-failure"
       "--network=container:gluetun"
       "--pull=always"
     ];
@@ -118,6 +131,7 @@ in {
       "${sonarrConfig}:/config"
       "${media}:/data"
     ];
+    dependsOn = [ "gluetun" ];
     environment = {
       PUID = "789";
       PGID = "789";
@@ -127,6 +141,7 @@ in {
       TP_THEME = "nord";
     };
     extraOptions = [
+      # "--restart=on-failure"
       "--network=container:gluetun"
       "--pull=always"
     ];
@@ -137,6 +152,7 @@ in {
       "${radarrConfig}:/config"
       "${media}:/data"
     ];
+    dependsOn = [ "gluetun" ];
     environment = {
       PUID = "789";
       PGID = "789";
@@ -145,9 +161,47 @@ in {
       TP_THEME = "nord";
     };
     extraOptions = [
+      # "--restart on-failure"
       "--network=container:gluetun"
       "--pull=always"
     ];
   };
-  
+
+  virtualisation.oci-containers.containers.readarr = {
+    image = "lscr.io/linuxserver/readarr:develop";
+    volumes = [
+      "${readarrConfig}:/config"
+      "${media}:/data"
+    ];
+    dependsOn = [ "gluetun" ];
+    environment = {
+      PUID = "789";
+      PGID = "789";
+      TZ = "America/Detroit";
+      DOCKER_MODS = "ghcr.io/gilbn/theme.park:readarr";
+      TP_THEME = "nord";
+    };
+    extraOptions = [
+      # "--restart on-failure"
+      "--network=container:gluetun"
+      "--pull=always"
+    ];
+  };
+  virtualisation.oci-containers.containers.flaresolverr = {
+    image = "ghcr.io/flaresolverr/flaresolverr:latest";
+    volumes = [
+      "${flaresolverrConfig}:/config"
+    ];
+    dependsOn = [ "gluetun" ];
+    environment = {
+      PUID = "789";
+      PGID = "789";
+      TZ = "America/Detroit";
+    };
+    extraOptions = [
+      # "--restart on-failure"
+      "--network=container:gluetun"
+      "--pull=always"
+    ];
+  };
 }

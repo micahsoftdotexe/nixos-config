@@ -1,20 +1,22 @@
 { config, pkgs, inputs, ... }: 
 {
-	virtualisation.oci-containers.containers.whocraft = {
+	virtualisation.oci-containers.containers.minecraft = {
 		autoStart = true;
 		image = "itzg/minecraft-server";
 		ports = ["25565:25565"];
 		environment = {
+			MOD_PLATFORM = "AUTO_CURSEFORGE";
+			CF_PAGE_URL = "https://www.curseforge.com/minecraft/modpacks/all-the-mods-9/files/5564414";
 			EULA = "TRUE";
-			TYPE = "FABRIC";
-			VERSION = "1.20.1";
-			INIT_MEMORY = "4G";
-			MAX_MEMORY = "10G";
-			FABRIC_VERSION = "0.15.7";
-			REMOVE_OLD_MODS = "false";
+			VERSION = "1.21";
+			INIT_MEMORY = "10G";
+			MAX_MEMORY = "12G";
 		};
+		environmentFiles = [
+      config.age.secrets.minecraft.path
+    ];
 		volumes = [
-			"/disk1/minecraft/whocraft:/data"
+			"/disk1/minecraft/atm9:/data"
 		];
 	};
 }

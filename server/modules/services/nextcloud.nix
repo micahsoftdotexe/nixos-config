@@ -2,7 +2,7 @@
 {
     services.nextcloud = {
         enable = true;
-        package = pkgs.nextcloud28;
+        package = pkgs.nextcloud30;
         hostName = "nextcloud.micahsoft.net";
         https = true;
         datadir = "/disk0/nextcloud";
@@ -13,10 +13,10 @@
             dbname = "nextcloud";
             dbpassFile = "${config.age.secrets.nextcloud_database_pass.path}";
         };
-        extraApps = {
-            deck = config.services.nextcloud.package.packages.apps.deck;
-            notes = config.services.nextcloud.package.packages.apps.notes;
-        };
+        # extraApps = {
+        #     deck = config.services.nextcloud.package.packages.apps.deck;
+        #     notes = config.services.nextcloud.package.packages.apps.notes;
+        # };
         extraAppsEnable = true;
         appstoreEnable = true;
     };

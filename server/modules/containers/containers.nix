@@ -5,14 +5,14 @@
 		containers.homeassistant = {
 			volumes = [ "/disk1/homeassistant/config:/config" ];
 			environment.TZ = "America/New_York";
-			image = "ghcr.io/home-assistant/home-assistant:2024.7.3"; # Warning: if the tag does not change, the image will not be updated
+			image = "ghcr.io/home-assistant/home-assistant:2024.11.0.dev202410170230"; # Warning: if the tag does not change, the image will not be updated
 			extraOptions = [ 
 				"--network=host" 
 				"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
 			];
 		};
 		containers.audiobookshelf = {
-			image = "ghcr.io/advplyr/audiobookshelf:2.11.0";
+			image = "ghcr.io/advplyr/audiobookshelf:2.15.0";
 			ports = ["8001:80"];
 			volumes = [ "/disk1/audiobooks/books:/audiobooks" "/disk1/audiobooks/metadata:/metadata" "/disk1/audiobooks/config:/config" ];
 		};

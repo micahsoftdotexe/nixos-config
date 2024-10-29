@@ -17,7 +17,7 @@
         #     deck = config.services.nextcloud.package.packages.apps.deck;
         #     notes = config.services.nextcloud.package.packages.apps.notes;
         # };
-        extraAppsEnable = true;
+        # extraAppsEnable = true;
         appstoreEnable = true;
     };
 

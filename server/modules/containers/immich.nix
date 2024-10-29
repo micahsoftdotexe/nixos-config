@@ -41,7 +41,7 @@ in {
   };
   virtualisation.oci-containers.containers.immich_server = {
     image = "ghcr.io/immich-app/immich-server:${immichVersion}";
-    ports = ["127.0.0.1:2283:3001"];
+    ports = ["127.0.0.1:2283:2283"];
     extraOptions = [
       "--network=immich-net"
       "--pull=always"
@@ -50,7 +50,7 @@ in {
       # to be inconsistent.
       #"--dns=10.88.0.1"
     ];
-    cmd = [ "start.sh" "immich" ];
+    # qcmd = [ "start.sh" "immich" ];
     environment = {
       IMMICH_VERSION = immichVersion;
     };
@@ -64,29 +64,29 @@ in {
     ];
   };
 
-  virtualisation.oci-containers.containers.immich_microservices = {
-    image = "ghcr.io/immich-app/immich-server:${immichVersion}";
-    extraOptions = [
-      "--network=immich-net"
-      "--pull=always"
-      # Force DNS resolution to only be the podman dnsname name server; by default podman provides a resolv.conf
-      # that includes both this server and the upstream system server, causing resolutions of other pod names
-      # to be inconsistent.
-      #"--dns=10.88.0.1"
-    ];
-    cmd = [ "start.sh" "microservices" ];
-    environment = {
-      IMMICH_VERSION = immichVersion;
-    };
-    environmentFiles = [
-			config.age.secrets.immich_env.path
-		];
-    volumes = [
-      "${immichPhotos}:/usr/src/app/upload"
-      # "/etc/localtime:/etc/localtime:ro"
-      # "${immichExternalVolume1}:${immichExternalVolume1}:ro"
-    ];
-  };
+  # virtualisation.oci-containers.containers.immich_microservices = {
+  #   image = "ghcr.io/immich-app/immich-server:${immichVersion}";
+  #   extraOptions = [
+  #     "--network=immich-net"
+  #     "--pull=always"
+  #     # Force DNS resolution to only be the podman dnsname name server; by default podman provides a resolv.conf
+  #     # that includes both this server and the upstream system server, causing resolutions of other pod names
+  #     # to be inconsistent.
+  #     #"--dns=10.88.0.1"
+  #   ];
+  #   cmd = [ "start.sh" "microservices" ];
+  #   environment = {
+  #     IMMICH_VERSION = immichVersion;
+  #   };
+  #   environmentFiles = [
+	# 		config.age.secrets.immich_env.path
+	# 	];
+  #   volumes = [
+  #     "${immichPhotos}:/usr/src/app/upload"
+  #     # "/etc/localtime:/etc/localtime:ro"
+  #     # "${immichExternalVolume1}:${immichExternalVolume1}:ro"
+  #   ];
+  # };
 
   virtualisation.oci-containers.containers.immich_machine_learning = {
     image = "ghcr.io/immich-app/immich-machine-learning:${immichVersion}";

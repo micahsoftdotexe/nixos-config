@@ -13,12 +13,12 @@
       ./modules/containers/containers.nix
       ./modules/containers/immich.nix
       # ./modules/services/coturn.nix
-      # ./modules/services/nextcloud.nix
+      ./modules/services/nextcloud.nix
       ./modules/services/nginx.nix
       # ./modules/services/matrix.nix
       ./modules/services/calibre.nix
       # ./modules/services/radicale.nix
-      # ./modules/services/postgresql.nix
+      ./modules/services/postgresql.nix
       ./modules/services/navidrome.nix
       ./modules/containers/pihole.nix
       # ./modules/containers/minecraft.nix
@@ -43,9 +43,9 @@
       #   owner = "turnserver";
       #   # identityPaths = "/home/micaht/.ssh/micaht";
       # };
-      # postgresql_initial_script = {
-      #   file = ../secrets/postgresql/matrix-database.sql.age;
-      # };
+      postgresql_initial_script = {
+        file = ../secrets/postgresql/matrix-database.sql.age;
+      };
       liveSync_env = {
         file = ../secrets/liveSync/livesync.env.age;
       };
@@ -221,6 +221,7 @@
       8448
       25565
       5055
+      8096
       8888
       8889
       9696
@@ -228,6 +229,7 @@
       5055
     ];
     allowedUDPPorts = [
+      8096
       8123
       5232
       25565

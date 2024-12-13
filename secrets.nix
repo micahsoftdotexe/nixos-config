@@ -21,6 +21,7 @@ in
   "secrets/liveSync/couchdb.ini.age".publicKeys = [micaht micahtronserver];
   "secrets/immich/immich.env.age".publicKeys = [micaht micahtronserver];
   "secrets/immich/immichdb.env.age".publicKeys = [micaht micahtronserver];
+  "secrets/immich/immich_nix.env.age".publicKeys = [micaht micahtronserver];
   "secrets/radicale/htpasswd.age".publicKeys = [micaht micahtronserver];
   "secrets/gluetun/gluetun.age".publicKeys = [micaht micahtronserver];
   "secrets/minecraft/minecraft.age".publicKeys = [micaht micahtronserver];

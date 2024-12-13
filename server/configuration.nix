@@ -11,18 +11,19 @@
       # "${inputs.micahpkgs}/nixos/modules/services/audio/navidrome.nix"
       ./hardware-configuration.nix
       ./modules/containers/containers.nix
-      ./modules/containers/immich.nix
+      # ./modules/containers/immich.nix
       # ./modules/services/coturn.nix
       ./modules/services/nextcloud.nix
       ./modules/services/nginx.nix
       # ./modules/services/matrix.nix
-      ./modules/services/calibre.nix
       # ./modules/services/radicale.nix
       ./modules/services/postgresql.nix
+      ./modules/services/immich.nix
       ./modules/services/navidrome.nix
       ./modules/containers/pihole.nix
       # ./modules/containers/minecraft.nix
       ./modules/containers/gluetun.nix
+      # ./modules/containers/go2rtc.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -43,9 +44,9 @@
       #   owner = "turnserver";
       #   # identityPaths = "/home/micaht/.ssh/micaht";
       # };
-      postgresql_initial_script = {
-        file = ../secrets/postgresql/matrix-database.sql.age;
-      };
+      # postgresql_initial_script = {
+      #   file = ../secrets/postgresql/matrix-database.sql.age;
+      # };
       liveSync_env = {
         file = ../secrets/liveSync/livesync.env.age;
       };
@@ -54,6 +55,9 @@
       };
       immich_env = {
         file = ../secrets/immich/immich.env.age;
+      };
+      immich_nix = {
+        file = ../secrets/immich/immich_nix.env.age;
       };
       immichdb_env = {
         file = ../secrets/immich/immichdb.env.age;
@@ -94,6 +98,12 @@
       media = {
         gid = 789;
       };
+      go2rtc = {
+        gid = 910;
+      };
+      immich = {
+        gid = 912;
+      };
     };
     users.micaht = {
       isNormalUser = true;
@@ -108,6 +118,16 @@
       isNormalUser = false;
       uid = 789;
       group = "media";
+    };
+    users.go2rtc = {
+      isNormalUser = false;
+      uid = 910;
+      group = "go2rtc";
+    };
+    users.immich = {
+      isNormalUser = false;
+      uid = 912;
+      group = "immich";
     };
     users.nginx.extraGroups = [ "acme" "turnserver" ];
   };
@@ -211,32 +231,42 @@
   networking.firewall = {
     enable = true;
     # interfaces."podman+".allowedUDPPorts = [ 53 ];
-    interfaces."tailscale0".allowedTCPPorts = [ 5232 ];
-    interfaces."tailscale0".allowedUDPPorts = [ 5232 ];
-    allowedTCPPorts = [ 22 80 443 8123 8000 2283
-      8123
-      5232
-      5349  # STUN tls
-      5350  # STUN tls alt
-      8448
-      25565
-      5055
-      8096
-      8888
-      8889
-      9696
-      8989
-      5055
+    # interfaces."tailscale0".allowedTCPPorts = [ 5232 ];
+    # interfaces."tailscale0".allowedUDPPorts = [ 5232 ];
+    allowedTCPPorts = [ 
+      22 
+      80 
+      443
+      1984 #go2rtc 
+      8123 #homeassistant
+      2283 #immich
+      25565 #minecraft
+      5055 #jellyseerr
+      8096 #local jelllyfin
+      8889 #qbittorrent
+      9696 #prowlarr
+      8989 #sonarr
+      8554 # rtsp go2rtc
+      8555 # webrtc go2rtc
+      5353 # homekit?
+      8090
+      8080
     ];
     allowedUDPPorts = [
-      8096
-      8123
-      5232
-      25565
+      8096 #local jelllyfin
+      8123 #homeassistant
+      25565 #minecraft
+      8090
+      8080
+      
     ];
-    allowedUDPPortRanges = [
-      { from=49152; to=49999; } # TURN relay
-    ];
+    # allowedUDPPortRanges = [
+    #   { from = 100; to = 65535;} #home assistant integrations
+    # ];
+    # allowedTCPPortRanges = 
+    # [
+	  #   {from = 100; to = 65535;} #home assistant integrations
+    # ];
   };
 
   services.zfs.autoScrub.enable = true;

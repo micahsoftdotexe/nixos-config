@@ -114,4 +114,9 @@ in {
       "${postgresRoot}:/var/lib/postgresql/data"
     ];
   };
+  virtualisation.oci-containers.containers.immich_adminer = {
+    image = "adminer";
+    extraOptions = [ "--network=immich-net" ]; 
+    ports=["8090:8080"];
+  };
 }

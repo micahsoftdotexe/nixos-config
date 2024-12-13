@@ -2,8 +2,9 @@
 {
 	services.calibre-web = {
 		enable = true;
+		dataDir = "calibre";
     options = {
-      calibreLibrary = /disk1/ebooks;
+      calibreLibrary = /disk1/ebooks/books;
 			enableBookUploading = true;
     };
 		listen.ip = "127.0.0.1";

@@ -42,6 +42,7 @@ in {
       VPN_TYPE = "wireguard";
       HTTPPROXY = "on";
       SHADOWSOCKS = "on";
+      DNS_ADDRESS = "194.242.2.2";
     };
     environmentFiles = [
       config.age.secrets.gluetun.path

@@ -5,13 +5,12 @@
 { config, pkgs, inputs, vscode-server, ... }:
 
 {
-  # disabledModules = [ "services/audio/navidrome.nix" ];
+  # disabledModules = [ "services/audio/immich.nix" ];
   imports =
     [ # Include the results of the hardware scan.
       # "${inputs.micahpkgs}/nixos/modules/services/audio/navidrome.nix"
       ./hardware-configuration.nix
       ./modules/containers/containers.nix
-      # ./modules/containers/immich.nix
       # ./modules/services/coturn.nix
       ./modules/services/nextcloud.nix
       ./modules/services/nginx.nix
@@ -21,7 +20,7 @@
       ./modules/services/immich.nix
       ./modules/services/navidrome.nix
       ./modules/containers/pihole.nix
-      # ./modules/containers/minecraft.nix
+      ./modules/containers/minecraft.nix
       ./modules/containers/gluetun.nix
       # ./modules/containers/go2rtc.nix
     ];
@@ -131,7 +130,6 @@
     };
     users.nginx.extraGroups = [ "acme" "turnserver" ];
   };
-  services.smartd.enable = true;
 
   security.acme = {
     acceptTerms = true;
@@ -142,13 +140,13 @@
       dnsProvider = "cloudflare";
       dnsPropagationCheck = true;
       dnsResolver = "1.1.1.1:53";
-      credentialsFile = "/disk1/credentials.secret";
+      credentialsFile = "/disk0/credentials.secret";
     };
     # certs.${config.services.coturn.realm} = {
     #   dnsProvider = "cloudflare";
     #   dnsPropagationCheck = true;
     #   dnsResolver = "1.1.1.1:53";
-    #   credentialsFile = "/disk1/credentials.secret";
+    #   credentialsFile = "/disk0/credentials.secret";
     #   postRun = "systemctl restart coturn.service";
     #   group = "turnserver";
     # };
@@ -156,7 +154,7 @@
     #   dnsProvider = "cloudflare";
     #   dnsPropagationCheck = false;
     #   dnsResolver = "1.1.1.1:53";
-    #   credentialsFile = "/disk1/credentials.secret";
+    #   credentialsFile = "/disk0/credentials.secret";
     #   postRun = "systemctl restart coturn.service";
     #   group = "turnserver";
     # };
@@ -182,6 +180,10 @@
     tailscale =  {
       enable = true;
       # permitCertUid = "caddy";
+    };
+    smartd = {
+      enable = true;
+      devices = [ {device = "/dev/sda";} {device= "/dev/sdb";} {device= "/dev/sdc";} {device= "/dev/sdd";} ];
     };
   };
   virtualisation = {
@@ -220,7 +222,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ 22 80 443 8123 8000 
   #     5349  # STUN tls
@@ -260,13 +261,13 @@
       8080
       
     ];
-    # allowedUDPPortRanges = [
-    #   { from = 100; to = 65535;} #home assistant integrations
-    # ];
-    # allowedTCPPortRanges = 
-    # [
-	  #   {from = 100; to = 65535;} #home assistant integrations
-    # ];
+    allowedUDPPortRanges = [
+      { from = 100; to = 65535;} #home assistant integrations
+    ];
+    allowedTCPPortRanges = 
+    [
+	    {from = 100; to = 65535;} #home assistant integrations
+    ];
   };
 
   services.zfs.autoScrub.enable = true;

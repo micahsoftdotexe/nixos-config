@@ -16,6 +16,13 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/eaeb27ec-c47c-4f74-8e10-76a30643cfed";
@@ -32,10 +39,10 @@
   #     fsType = "xfs";
   #   };
 
-  fileSystems."/disk1" =
-    { device = "/dev/disk/by-uuid/3cf3bd1e-7e31-4fec-b439-be2d93239d0a";
-      fsType = "xfs";
-    };
+ fileSystems."/disk1" =
+   { device = "/dev/disk/by-uuid/3cf3bd1e-7e31-4fec-b439-be2d93239d0a";
+     fsType = "xfs";
+   };
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/62c0265a-d7ce-4e42-a4a8-7f0a87c50cc1"; }

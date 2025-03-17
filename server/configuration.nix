@@ -14,6 +14,7 @@
       # ./modules/services/coturn.nix
       ./modules/services/nextcloud.nix
       ./modules/services/nginx.nix
+      ./modules/services/actual.nix
       # ./modules/services/matrix.nix
       # ./modules/services/radicale.nix
       ./modules/services/postgresql.nix
@@ -79,6 +80,9 @@
         file = ../secrets/nextcloud/nextcloud-database-pass.age;
         owner = "nextcloud";
       };
+      pihole = {
+        file = ../secrets/pihole/pihole.age;
+      };
     };
     identityPaths = ["/home/micaht/.ssh/micaht" "/etc/ssh/micahtronserver"];
   };
@@ -102,6 +106,9 @@
       };
       immich = {
         gid = 912;
+      };
+      pihole = {
+        gid = 913;
       };
     };
     users.micaht = {
@@ -127,6 +134,11 @@
       isNormalUser = false;
       uid = 912;
       group = "immich";
+    };
+    users.pihole = {
+      isNormalUser = false;
+      uid = 913;
+      group = "pihole";
     };
     users.nginx.extraGroups = [ "acme" "turnserver" ];
   };
@@ -238,7 +250,8 @@
       22 
       80 
       443
-      1984 #go2rtc 
+      1984 #go2rtc
+      # 1986 #actual 
       8123 #homeassistant
       2283 #immich
       25565 #minecraft
@@ -254,6 +267,7 @@
       8080
     ];
     allowedUDPPorts = [
+      # 1986 #actual
       8096 #local jelllyfin
       8123 #homeassistant
       25565 #minecraft

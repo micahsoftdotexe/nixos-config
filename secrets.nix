@@ -27,4 +27,5 @@ in
   "secrets/minecraft/minecraft.age".publicKeys = [micaht micahtronserver];
   "secrets/nextcloud/nextcloud-pass.age".publicKeys = [micaht micahtronserver];
   "secrets/nextcloud/nextcloud-database-pass.age".publicKeys = [micaht micahtronserver];
+  "secrets/pihole/pihole.age".publicKeys = [micaht micahtronserver];
 }

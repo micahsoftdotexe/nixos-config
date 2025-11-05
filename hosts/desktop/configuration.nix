@@ -182,8 +182,10 @@
       xdg-desktop-portal-gtk
       hyprpolkitagent
       gvfs
+      cpu-x
       gparted
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+      openrgb-with-all-plugins
 
     ];
     sessionVariables = {

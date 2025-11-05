@@ -1,6 +1,7 @@
 { config, pkgs, host, username, nix-flatpak, home-manager, ... }:
 
 {
+  hardware.openrgb.enable = true;
   xserver = {
     enable = true;
     videoDrivers = [ "amdgpu" ];

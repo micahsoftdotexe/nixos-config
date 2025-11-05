@@ -39,7 +39,7 @@
   outputs = { self, nixpkgs, hyprland, ... }@inputs: let
     username = "micaht";
     system = "x86_64-linux";
-    configPath = "/home/micaht/nix-config";
+    configPath = "/home/${username}/nixos-config";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;

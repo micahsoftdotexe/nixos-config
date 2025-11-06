@@ -186,6 +186,7 @@
       gparted
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
       openrgb-with-all-plugins
+      pavucontrol
 
     ];
     sessionVariables = {

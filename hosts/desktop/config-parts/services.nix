@@ -10,6 +10,13 @@
       layout = "us";
       variant = "";
     };
+    #displayManager.lightdm = {
+     # enable = true;
+      # wayland = true;
+      #greeters.slick = {
+       # enable = true;
+        #theme.name = "material-slick";
+      #};
     desktopManager = { cinnamon.enable = true;};
   };
   displayManager.gdm = {

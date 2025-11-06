@@ -17,7 +17,7 @@
     #   url = "github:numtide/flake-utils";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     #Hyprland
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -36,7 +36,7 @@
     };
 
   };
-  outputs = { self, nixpkgs, hyprland, ... }@inputs: let
+  outputs = { self, nixpkgs, hyprland, nixos-hardware, ... }@inputs: let
     username = "micaht";
     system = "x86_64-linux";
     configPath = "/home/${username}/nixos-config";
@@ -61,6 +61,18 @@
             inherit self inputs username configPath hyprland;
            };
           
+        };
+        surface = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/surface
+            inputs.home-manager.nixosModules.default
+            nixos-hardware.nixosModules.microsoft-surface-pro-intel
+          ];
+          specialArgs = { 
+            host = "surface";
+            inherit self inputs username configPath hyprland;
+          };
         };
       };
     };

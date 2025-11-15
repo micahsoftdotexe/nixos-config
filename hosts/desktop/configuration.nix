@@ -187,6 +187,9 @@
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
       openrgb-with-all-plugins
       pavucontrol
+      edl
+      wget
+      unzip
 
     ];
     sessionVariables = {

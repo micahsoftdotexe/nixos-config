@@ -9,6 +9,8 @@
 
     stylix.url = "github:danth/stylix";
 
+    waybar.url = "github:alexays/waybar";
+
     # flake-parts = {
     #   url = "github:hercules-ci/flake-parts";
     #   inputs.nixpkgs.follows = "nixpkgs";

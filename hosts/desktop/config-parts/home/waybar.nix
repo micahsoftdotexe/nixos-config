@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   enable = true;
-  package = pkgs.waybar;
+  package = inputs.waybar.packages.${pkgs.system}.waybar;
   # settings = {
   #   layer = "top";
   #   position = "bottom";

@@ -38,7 +38,7 @@
     "scroll": true
   },
   "cava": {
-    "method": "pipewire",
+    "method": "pulse",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
     "source": "auto",
     "bar_delimiter": 0,

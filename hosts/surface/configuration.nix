@@ -10,7 +10,10 @@
       ./hardware-configuration.nix
     ];
 
-    hardware.microsoft-surface.kernelVersion = "stable";
+  hardware.microsoft-surface.kernelVersion = "stable";
+  # microsoft-surface.surface-control.enable = true;
+  nix.settings.experimental-features = "nix-command flakes";
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -144,6 +147,7 @@
   # Install firefox.
   programs.firefox.enable = true;
   programs.direnv.enable = true;
+  programs.localsend.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -156,6 +160,7 @@
      git
      vscode
      cheese
+     surface-control
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

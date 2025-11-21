@@ -99,6 +99,7 @@
         thunar-volman
       ];
     };
+    localsend.enable = true;
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.default;

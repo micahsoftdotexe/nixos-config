@@ -161,6 +161,7 @@
      vscode
      cheese
      surface-control
+     tidal-hifi
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

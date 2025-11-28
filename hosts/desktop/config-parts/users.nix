@@ -25,6 +25,7 @@
       btop
       hyprpaper
       ghostty
+      tidal-hifi
     #  thunderbird
     ];
   };

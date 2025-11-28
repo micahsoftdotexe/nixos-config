@@ -118,6 +118,10 @@ in {
     };
     # cava.enable = true;
   };
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+  };
   # programs.home-manager.enable = true;
   # programs.waybar.enable = true;
   # programs.waybar = import ./waybar.nix { inherit pkgs; };

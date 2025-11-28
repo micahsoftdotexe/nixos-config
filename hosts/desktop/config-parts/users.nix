@@ -24,6 +24,7 @@
       hyprlock
       btop
       hyprpaper
+      ghostty
     #  thunderbird
     ];
   };

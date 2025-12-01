@@ -53,8 +53,45 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland = {
+      enable = true;
+      compositor = "kwin";
+    };
+    extraPackages = with pkgs.kdePackages; [
+      qtvirtualkeyboard
+    ];
+    settings = {
+      General = {
+        InputMethod = "qtvirtualkeyboard";
+      };
+      InputMethod = {
+        DefaultInputMethod = "qtvirtualkeyboard";
+      };
+      # autoLogin.enable = false;
+      # autoLogin.user = "micaht";
+    };
+  };
+
+  # Set environment variables for SDDM to load virtual keyboard at boot
+  environment.etc."sddm.conf.d/virtualkeyboard.conf".text = ''
+    [General]
+    InputMethod=qtvirtualkeyboard
+    
+    [InputMethod]
+    DefaultInputMethod=qtvirtualkeyboard
+  '';
+
+  systemd.services.display-manager.environment = {
+    QT_IM_MODULE = "qtvirtualkeyboard";
+    QT_VIRTUALKEYBOARD_DESKTOP_DISABLE = "0";
+  };
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -66,44 +103,45 @@
       enable = true;
       config = {
           Config = {
-          BlockOnPalm = true;
-          TouchThreshold = 20;
-          StabilityThreshold = 0.1;
+            Processing = "advanced"; 
+            BlockOnPalm = true;
+            TouchThreshold = 20;
+            StabilityThreshold = 0.1;
           };
       };
   };
 # Helper function to detect the currently logged-in user (gnome session assumed)
-  systemd.services.enable-osk = {
-    description = "Enable GNOME On-Screen Keyboard and notify user";
-    script = ''
-      USER=$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)
-      USER_ID=$(id -u "$USER")
-      USER_ENV="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus"
+  # systemd.services.enable-osk = {
+  #   description = "Enable GNOME On-Screen Keyboard and notify user";
+  #   script = ''
+  #     USER=$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)
+  #     USER_ID=$(id -u "$USER")
+  #     USER_ENV="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus"
 
-      # Enable On-Screen Keyboard
-      sudo -u "$USER" $USER_ENV gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
+  #     # Enable On-Screen Keyboard
+  #     sudo -u "$USER" $USER_ENV gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
 
-      # Notify user
-      sudo -u "$USER" $USER_ENV ${pkgs.libnotify}/bin/notify-send "On-Screen Keyboard Enabled" "Surface keyboard disconnected. Touch keyboard active."
-    '';
-    serviceConfig.Type = "oneshot";
-  };
+  #     # Notify user
+  #     sudo -u "$USER" $USER_ENV ${pkgs.libnotify}/bin/notify-send "On-Screen Keyboard Enabled" "Surface keyboard disconnected. Touch keyboard active."
+  #   '';
+  #   serviceConfig.Type = "oneshot";
+  # };
 
-  systemd.services.disable-osk = {
-    description = "Disable GNOME On-Screen Keyboard and notify user";
-    script = ''
-      USER=$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)
-      USER_ID=$(id -u "$USER")
-      USER_ENV="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus"
+  # systemd.services.disable-osk = {
+  #   description = "Disable GNOME On-Screen Keyboard and notify user";
+  #   script = ''
+  #     USER=$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)
+  #     USER_ID=$(id -u "$USER")
+  #     USER_ENV="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus"
 
-      # Disable On-Screen Keyboard
-      sudo -u "$USER" $USER_ENV gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false
+  #     # Disable On-Screen Keyboard
+  #     sudo -u "$USER" $USER_ENV gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false
 
-      # Notify user
-      sudo -u "$USER" $USER_ENV ${pkgs.libnotify}/bin/notify-send "On-Screen Keyboard Disabled" "Surface keyboard connected. Touch keyboard deactivated."
-    '';
-    serviceConfig.Type = "oneshot";
-  };
+  #     # Notify user
+  #     sudo -u "$USER" $USER_ENV ${pkgs.libnotify}/bin/notify-send "On-Screen Keyboard Disabled" "Surface keyboard connected. Touch keyboard deactivated."
+  #   '';
+  #   serviceConfig.Type = "oneshot";
+  # };
 
   # Udev rules for keyboard connect/disconnect
   services.udev.extraRules = ''
@@ -157,11 +195,16 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-     git
-     vscode
-     cheese
-     surface-control
+    git
+    vscode
+    cheese
+    surface-control
+    kdePackages.plasma-keyboard
+    kdePackages.qtvirtualkeyboard
+    tidal-hifi
   ];
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -189,5 +232,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }

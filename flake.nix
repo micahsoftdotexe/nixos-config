@@ -57,6 +57,7 @@
             ./hosts/desktop
             inputs.stylix.nixosModules.stylix
             inputs.home-manager.nixosModules.default
+            ./shared
           ];
           specialArgs = { 
             host = "micahtronL";
@@ -70,6 +71,7 @@
             ./hosts/surface
             inputs.home-manager.nixosModules.default
             nixos-hardware.nixosModules.microsoft-surface-pro-intel
+            ./shared
           ];
           specialArgs = { 
             host = "surface";

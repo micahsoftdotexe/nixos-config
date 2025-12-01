@@ -53,12 +53,12 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
+   # wayland = {
+    #   enable = true;
+    #   compositor = "kwin";
+    # };
   services.displayManager.sddm = {
     enable = true;
-    wayland = {
-      enable = true;
-      compositor = "kwin";
-    };
     extraPackages = with pkgs.kdePackages; [
       qtvirtualkeyboard
     ];
@@ -66,27 +66,22 @@
       General = {
         InputMethod = "qtvirtualkeyboard";
       };
-      InputMethod = {
-        DefaultInputMethod = "qtvirtualkeyboard";
-      };
-      # autoLogin.enable = false;
-      # autoLogin.user = "micaht";
     };
   };
 
   # Set environment variables for SDDM to load virtual keyboard at boot
-  environment.etc."sddm.conf.d/virtualkeyboard.conf".text = ''
-    [General]
-    InputMethod=qtvirtualkeyboard
+  # environment.etc."sddm.conf.d/virtualkeyboard.conf".text = ''
+  #   [General]
+  #   InputMethod=qtvirtualkeyboard
     
-    [InputMethod]
-    DefaultInputMethod=qtvirtualkeyboard
-  '';
+  #   [InputMethod]
+  #   DefaultInputMethod=qtvirtualkeyboard
+  # '';
 
-  systemd.services.display-manager.environment = {
-    QT_IM_MODULE = "qtvirtualkeyboard";
-    QT_VIRTUALKEYBOARD_DESKTOP_DISABLE = "0";
-  };
+  # systemd.services.display-manager.environment = {
+  #   QT_IM_MODULE = "qtvirtualkeyboard";
+  #   QT_VIRTUALKEYBOARD_DESKTOP_DISABLE = "0";
+  # };
   # services.displayManager.sddm.enable = true;
   # services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -144,10 +139,10 @@
   # };
 
   # Udev rules for keyboard connect/disconnect
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="input", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="09c0", RUN+="${pkgs.systemd}/bin/systemctl start disable-osk.service"
-    ACTION=="remove", SUBSYSTEM=="input", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="09c0", RUN+="${pkgs.systemd}/bin/systemctl start enable-osk.service"
-  '';
+  # services.udev.extraRules = ''
+  #   ACTION=="add", SUBSYSTEM=="input", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="09c0", RUN+="${pkgs.systemd}/bin/systemctl start disable-osk.service"
+  #   ACTION=="remove", SUBSYSTEM=="input", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="09c0", RUN+="${pkgs.systemd}/bin/systemctl start enable-osk.service"
+  # '';
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -178,6 +173,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       telegram-desktop
+      vesktop
     #  thunderbird
     ];
   };
@@ -199,7 +195,7 @@
     vscode
     cheese
     surface-control
-    kdePackages.plasma-keyboard
+    # kdePackages.plasma-keyboard
     kdePackages.qtvirtualkeyboard
     tidal-hifi
   ];

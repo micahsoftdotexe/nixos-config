@@ -1,1 +1,0 @@
-🔧 Building NixOS configuration from: /home/micaht/nixos-config/flake.nix (system: surface)

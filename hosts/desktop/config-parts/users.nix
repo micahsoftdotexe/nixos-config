@@ -26,6 +26,7 @@
       hyprpaper
       ghostty
       tidal-hifi
+      feh
     #  thunderbird
     ];
   };

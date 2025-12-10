@@ -2,16 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  # nixpkgs.overlays =
+  #   [
+  #     (import ./overlays/iptsd.nix)
+  #     # (import ./overlays/osk.nix)
+  #     # (import ./overlays/eog-plugins.nix)
+  #   ];
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   hardware.microsoft-surface.kernelVersion = "stable";
-  # microsoft-surface.surface-control.enable = true;
   nix.settings.experimental-features = "nix-command flakes";
 
   # Bootloader.
@@ -52,9 +57,17 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
+
+  # Fix cursor and configure GNOME settings
+  environment.sessionVariables = {
+    XCURSOR_THEME = "Adwaita";
+    XCURSOR_SIZE = "24";
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -62,13 +75,16 @@
     variant = "";
   };
 
-  services.iptsd = {
+  # services.tlp.enable = lib.mkForce false;
+
+ services.iptsd = {
       enable = true;
       config = {
           Config = {
-          BlockOnPalm = true;
-          TouchThreshold = 20;
-          StabilityThreshold = 0.1;
+            Processing = "advanced"; 
+            BlockOnPalm = true;
+            TouchThreshold = 20;
+            StabilityThreshold = 0.1;
           };
       };
   };
@@ -140,6 +156,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       telegram-desktop
+      vesktop
     #  thunderbird
     ];
   };
@@ -157,12 +174,31 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-     git
-     vscode
-     cheese
-     surface-control
-     tidal-hifi
+    git
+    vscode
+    cheese
+    surface-control
+    gnome-extension-manager
+    gnome-tweaks
+    adwaita-icon-theme
   ];
+
+fonts.packages = with pkgs; [
+    noto-fonts
+    ubuntu-classic
+    noto-fonts-color-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    nerd-fonts.fira-code
+    nerd-fonts.hack
+    nerd-fonts.ubuntu
+    mplus-outline-fonts.githubRelease
+    dina-font
+    fira
+  ];
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -190,5 +226,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }

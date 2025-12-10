@@ -17,6 +17,12 @@ fi
 echo "🔧 Building NixOS configuration from: $FLAKE_FILE (system: $SYSTEM)"
 
 # Run the build
-sudo nixos-rebuild switch --flake ".#${SYSTEM}" --upgrade
+
+if [[ "$SYSTEM" == "surface" ]]; then
+  echo "📡 Using remote build host: micaht@micahtronserver"
+  sudo nixos-rebuild switch --flake ".#${SYSTEM}" --upgrade --build-host micaht@micahtronserver
+else
+  sudo nixos-rebuild switch --flake ".#${SYSTEM}" --upgrade
+fi
 
 echo "✅ Build completed and switched."

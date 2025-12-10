@@ -19,7 +19,7 @@
     #   url = "github:numtide/flake-utils";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware.url = "github:8bitbuddhist/nixos-hardware/surface-rust-target-spec-fix";
     #Hyprland
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -68,6 +68,7 @@
         surface = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            inputs.nix-flatpak.nixosModules.nix-flatpak
             ./hosts/surface
             inputs.home-manager.nixosModules.default
             nixos-hardware.nixosModules.microsoft-surface-pro-intel

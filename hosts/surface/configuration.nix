@@ -2,16 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  # nixpkgs.overlays =
+  #   [
+  #     (import ./overlays/iptsd.nix)
+  #     # (import ./overlays/osk.nix)
+  #     # (import ./overlays/eog-plugins.nix)
+  #   ];
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   hardware.microsoft-surface.kernelVersion = "stable";
-  # microsoft-surface.surface-control.enable = true;
   nix.settings.experimental-features = "nix-command flakes";
 
   # Bootloader.
@@ -52,41 +57,17 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-   # wayland = {
-    #   enable = true;
-    #   compositor = "kwin";
-    # };
-  services.displayManager.sddm = {
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm = {
     enable = true;
-    extraPackages = with pkgs.kdePackages; [
-      qtvirtualkeyboard
-    ];
-    settings = {
-      General = {
-        InputMethod = "qtvirtualkeyboard";
-      };
-    };
+    wayland = true;
   };
 
-  # Set environment variables for SDDM to load virtual keyboard at boot
-  # environment.etc."sddm.conf.d/virtualkeyboard.conf".text = ''
-  #   [General]
-  #   InputMethod=qtvirtualkeyboard
-    
-  #   [InputMethod]
-  #   DefaultInputMethod=qtvirtualkeyboard
-  # '';
-
-  # systemd.services.display-manager.environment = {
-  #   QT_IM_MODULE = "qtvirtualkeyboard";
-  #   QT_VIRTUALKEYBOARD_DESKTOP_DISABLE = "0";
-  # };
-  # services.displayManager.sddm.enable = true;
-  # services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  # Fix cursor and configure GNOME settings
+  environment.sessionVariables = {
+    XCURSOR_THEME = "Adwaita";
+    XCURSOR_SIZE = "24";
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -94,7 +75,9 @@
     variant = "";
   };
 
-  services.iptsd = {
+  # services.tlp.enable = lib.mkForce false;
+
+ services.iptsd = {
       enable = true;
       config = {
           Config = {
@@ -106,43 +89,43 @@
       };
   };
 # Helper function to detect the currently logged-in user (gnome session assumed)
-  # systemd.services.enable-osk = {
-  #   description = "Enable GNOME On-Screen Keyboard and notify user";
-  #   script = ''
-  #     USER=$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)
-  #     USER_ID=$(id -u "$USER")
-  #     USER_ENV="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus"
+  systemd.services.enable-osk = {
+    description = "Enable GNOME On-Screen Keyboard and notify user";
+    script = ''
+      USER=$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)
+      USER_ID=$(id -u "$USER")
+      USER_ENV="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus"
 
-  #     # Enable On-Screen Keyboard
-  #     sudo -u "$USER" $USER_ENV gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
+      # Enable On-Screen Keyboard
+      sudo -u "$USER" $USER_ENV gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
 
-  #     # Notify user
-  #     sudo -u "$USER" $USER_ENV ${pkgs.libnotify}/bin/notify-send "On-Screen Keyboard Enabled" "Surface keyboard disconnected. Touch keyboard active."
-  #   '';
-  #   serviceConfig.Type = "oneshot";
-  # };
+      # Notify user
+      sudo -u "$USER" $USER_ENV ${pkgs.libnotify}/bin/notify-send "On-Screen Keyboard Enabled" "Surface keyboard disconnected. Touch keyboard active."
+    '';
+    serviceConfig.Type = "oneshot";
+  };
 
-  # systemd.services.disable-osk = {
-  #   description = "Disable GNOME On-Screen Keyboard and notify user";
-  #   script = ''
-  #     USER=$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)
-  #     USER_ID=$(id -u "$USER")
-  #     USER_ENV="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus"
+  systemd.services.disable-osk = {
+    description = "Disable GNOME On-Screen Keyboard and notify user";
+    script = ''
+      USER=$(loginctl list-sessions --no-legend | awk '{print $3}' | head -n 1)
+      USER_ID=$(id -u "$USER")
+      USER_ENV="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus"
 
-  #     # Disable On-Screen Keyboard
-  #     sudo -u "$USER" $USER_ENV gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false
+      # Disable On-Screen Keyboard
+      sudo -u "$USER" $USER_ENV gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false
 
-  #     # Notify user
-  #     sudo -u "$USER" $USER_ENV ${pkgs.libnotify}/bin/notify-send "On-Screen Keyboard Disabled" "Surface keyboard connected. Touch keyboard deactivated."
-  #   '';
-  #   serviceConfig.Type = "oneshot";
-  # };
+      # Notify user
+      sudo -u "$USER" $USER_ENV ${pkgs.libnotify}/bin/notify-send "On-Screen Keyboard Disabled" "Surface keyboard connected. Touch keyboard deactivated."
+    '';
+    serviceConfig.Type = "oneshot";
+  };
 
   # Udev rules for keyboard connect/disconnect
-  # services.udev.extraRules = ''
-  #   ACTION=="add", SUBSYSTEM=="input", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="09c0", RUN+="${pkgs.systemd}/bin/systemctl start disable-osk.service"
-  #   ACTION=="remove", SUBSYSTEM=="input", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="09c0", RUN+="${pkgs.systemd}/bin/systemctl start enable-osk.service"
-  # '';
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="input", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="09c0", RUN+="${pkgs.systemd}/bin/systemctl start disable-osk.service"
+    ACTION=="remove", SUBSYSTEM=="input", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="09c0", RUN+="${pkgs.systemd}/bin/systemctl start enable-osk.service"
+  '';
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -195,9 +178,24 @@
     vscode
     cheese
     surface-control
-    # kdePackages.plasma-keyboard
-    kdePackages.qtvirtualkeyboard
-    tidal-hifi
+    gnome-extension-manager
+    gnome-tweaks
+    adwaita-icon-theme
+  ];
+
+fonts.packages = with pkgs; [
+    noto-fonts
+    ubuntu-classic
+    noto-fonts-color-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    nerd-fonts.fira-code
+    nerd-fonts.hack
+    nerd-fonts.ubuntu
+    mplus-outline-fonts.githubRelease
+    dina-font
+    fira
   ];
 
 

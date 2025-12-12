@@ -173,6 +173,9 @@
     systemPackages = with pkgs; [
       clinfo
       davinci-resolve
+      distrobox
+      sqlitestudio
+      localsend
       libsecret
       gnome-keyring
       kdePackages.kwallet
@@ -197,6 +200,10 @@
     };
   };
   
+  # virtualisation.podman = {
+  #   enable = true;
+  #   dockerCompat = true;
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

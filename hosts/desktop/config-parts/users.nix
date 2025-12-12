@@ -27,6 +27,7 @@
       ghostty
       tidal-hifi
       feh
+      file-roller
     #  thunderbird
     ];
   };

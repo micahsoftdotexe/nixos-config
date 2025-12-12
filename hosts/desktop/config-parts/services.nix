@@ -46,5 +46,6 @@
   # Enable the OpenSSH daemon.
   openssh.enable = true;
   gnome.gnome-keyring.enable = true;
+  envfs.enable = true;
 
 }

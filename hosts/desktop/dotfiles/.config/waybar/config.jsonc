@@ -52,7 +52,7 @@
   },
   "clock": {
     "timezone": "America/New_York",
-    "format": "{:%I:%M  %d, %m}",
+    "format": "{:%I:%M  %m/%d/%Y }",
     "tooltip-format": "{calendar}",
     "calendar": {
       "mode": "month"

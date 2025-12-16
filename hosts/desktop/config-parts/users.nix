@@ -16,7 +16,7 @@
       gimp
       qbittorrent
       git
-      rofi
+      hyprlauncher
       kitty
       kdePackages.dolphin
       nwg-displays

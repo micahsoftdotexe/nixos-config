@@ -16,6 +16,7 @@
   # Bootloader.
   
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.trusted-users = [ "root" "${username}" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -193,6 +194,7 @@
       edl
       wget
       unzip
+      devenv
 
     ];
     sessionVariables = {

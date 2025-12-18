@@ -28,7 +28,25 @@
     package = pkgs.mullvad-vpn;
   };
   # Enable CUPS to print documents.
-  printing.enable = true;
+  ipp-usb.enable = true;
+  printing = {
+    enable = true;
+    drivers = with pkgs; [
+      hplip
+      gutenprint
+      gutenprintBin
+      canon-cups-ufr2
+      cnijfilter2
+      # epson-inkjet-escpr
+      # brother-brlaser
+    ];
+  };
+  # printing.enable = true;
+  avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
   pulseaudio.enable = false;
   pipewire = {
     enable = true;

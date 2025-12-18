@@ -118,6 +118,16 @@
 
   };
 
+  # hardware.printers = {
+  #   ensurePrinters = [
+  #     {
+  #       name = "Cannon";
+  #       location = "Home";
+  #       deviceUri = "usb://Canon/TS3700%20series?serial=A1271A";
+  #     }
+  #   ];
+  # };
+
 
   fonts.packages = with pkgs; [
     noto-fonts

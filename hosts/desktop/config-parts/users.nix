@@ -28,6 +28,7 @@
       tidal-hifi
       feh
       file-roller
+      libation
     #  thunderbird
     ];
   };

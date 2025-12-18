@@ -363,11 +363,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1765902757,
-        "narHash": "sha256-NUOxXjV94sSVoCCjiFC1wECT8A+kAf7JrhJZzHnzWos=",
+        "lastModified": 1765999585,
+        "narHash": "sha256-xMaGK7XS02/Ttno5kUTda7tMV38tMHD/ZJj9sYjfd+o=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "709855842068315bb2109d8f422a70c2b5ed1931",
+        "rev": "f88deb928a0f7dc02f427473f8c29e8f2bed14a3",
         "type": "github"
       },
       "original": {
@@ -645,16 +645,16 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1765371797,
-        "narHash": "sha256-yaHE0vpK7XN/BR6B8jufAWrp7uYzwkhUbqk8G9EU1ak=",
+        "lastModified": 1765495033,
+        "narHash": "sha256-AhOhARy6nSNw+AdwH1MtG5ugDbbHqfddolM3k89OScU=",
         "owner": "8bitbuddhist",
         "repo": "nixos-hardware",
-        "rev": "4bf4cf11ca79c4169617eabd7d57696fe6d2954c",
+        "rev": "32c31709632f666c1ec834c532f28d89eb0ed718",
         "type": "github"
       },
       "original": {
         "owner": "8bitbuddhist",
-        "ref": "surface-rust-target-spec-fix",
+        "ref": "surface-kernel-6.18",
         "repo": "nixos-hardware",
         "type": "github"
       }

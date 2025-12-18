@@ -19,7 +19,7 @@
     #   url = "github:numtide/flake-utils";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    nixos-hardware.url = "github:8bitbuddhist/nixos-hardware/surface-rust-target-spec-fix";
+    nixos-hardware.url = "github:8bitbuddhist/nixos-hardware/surface-kernel-6.18";
     #Hyprland
     hyprland = {
       url = "github:hyprwm/Hyprland";

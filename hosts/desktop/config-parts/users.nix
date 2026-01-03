@@ -8,6 +8,7 @@
     packages = with pkgs; [
       telegram-desktop
       vivaldi
+      brave
       vesktop
       spotify
       vlc
@@ -29,6 +30,9 @@
       feh
       file-roller
       libation
+      # yt-dlg
+      # yt-dlp
+      python3
     #  thunderbird
     ];
   };

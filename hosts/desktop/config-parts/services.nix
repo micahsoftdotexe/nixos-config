@@ -21,6 +21,8 @@
   };
   displayManager.gdm = {
     enable = true;
+    # cursorTheme = "Adwaita"; # Replace with your preferred cursor theme
+    # cursorSize = 24;         # Adjust the size as needed
     wayland = true;
   };
   mullvad-vpn = {

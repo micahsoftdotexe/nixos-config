@@ -128,7 +128,7 @@
   #   ];
   # };
 
-
+  hardware.amdgpu.opencl.enable = true;
   fonts.packages = with pkgs; [
     noto-fonts
     ubuntu-classic
@@ -196,7 +196,7 @@
       xdg-desktop-portal-gtk
       hyprpolkitagent
       gvfs
-      cpu-x
+      # cpu-x
       gparted
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
       openrgb-with-all-plugins

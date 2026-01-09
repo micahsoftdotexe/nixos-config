@@ -38,7 +38,7 @@
       gutenprint
       gutenprintBin
       canon-cups-ufr2
-      cnijfilter2
+      # cnijfilter2
       # epson-inkjet-escpr
       # brother-brlaser
     ];

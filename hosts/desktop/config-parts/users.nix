@@ -30,6 +30,8 @@
       feh
       file-roller
       libation
+      bitwarden-desktop
+      git-filter-repo
       # yt-dlg
       # yt-dlp
       python3

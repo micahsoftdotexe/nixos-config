@@ -95,7 +95,7 @@
     direnv.enable = true;
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-archive-plugin
         thunar-volman
       ];
@@ -176,12 +176,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  programs.adb.enable = true;
   programs.gnome-disks.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
     systemPackages = with pkgs; [
+      android-tools
       clinfo
       davinci-resolve
       distrobox
@@ -199,6 +199,7 @@
       # cpu-x
       gparted
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+      inputs.helium.packages.${pkgs.system}.default
       openrgb-with-all-plugins
       pavucontrol
       edl

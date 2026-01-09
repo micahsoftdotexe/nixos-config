@@ -36,6 +36,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helium = {
+      url = "github:amaanq/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
   outputs = { self, nixpkgs, hyprland, nixos-hardware, ... }@inputs: let

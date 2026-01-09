@@ -39,7 +39,7 @@ in {
       ".assets".source = config.lib.file.mkOutOfStoreSymlink
         "${configPath}/hosts/desktop/dotfiles/.assets";
 
-        ".vscode/argv.json".source = ../../dotfiles/.vscode/argv.json;
+      ".vscode/argv.json".source = ../../dotfiles/.vscode/argv.json;
     };
     
   };
@@ -53,10 +53,11 @@ in {
     settings = {
       preload = "${config.home.homeDirectory}/.assets/wallpapers/wallpaper2.png";
       wallpaper = [
-        "DP-1,${config.home.homeDirectory}/.assets/wallpapers/wallpaper2.png"
-        "DP-2,${config.home.homeDirectory}/.assets/wallpapers/wallpaper2.png"
-        "DP-3,${config.home.homeDirectory}/.assets/wallpapers/wallpaper2.png"
-        "HDMI-A-1,${config.home.homeDirectory}/.assets/wallpapers/wallpaper2.png"
+        {
+          monitor = "";
+          path = "${config.home.homeDirectory}/.assets/wallpapers/wallpaper2.png";
+          fit_mode = "fill";
+        }
       ];
       #mode = "fill";
       # interval = 600;

@@ -12,11 +12,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-
-    impermanence.url = "github:nix-community/impermanence";
-
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
   };
 

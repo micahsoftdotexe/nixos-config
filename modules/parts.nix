@@ -1,4 +1,11 @@
 {
+  imports = [
+    ./system/base.nix
+    ./system/desktop-mango.nix
+    ./system/audio-portal-polkit.nix
+    ./system/packages.nix
+  ];
+
   config = {
     systems = [
       "x86_64-linux"

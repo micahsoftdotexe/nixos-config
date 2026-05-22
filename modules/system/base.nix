@@ -28,5 +28,11 @@
     services.gvfs.enable = true;
 
     nixpkgs.config.allowUnfree = true;
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      persistent = true;
+      options = "--delete-older-than 3d";
+    };
   };
 }

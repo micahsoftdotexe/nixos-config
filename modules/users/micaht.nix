@@ -1,6 +1,13 @@
 { inputs, ... }: {
   flake.nixosModules.micaht = { pkgs, ... }: {
+    programs.fish = {
+      enable = true;
+      interactiveShellInit = ''
+        set fish_greeting 
+      '';
+    };
     users.users.micaht = {
+      shell = pkgs.fish;
       isNormalUser = true;
       description = "Micah";
       extraGroups = [ "networkmanager" "wheel" ];
@@ -12,6 +19,7 @@
         kdePackages.ark
         nur.repos.Ev357.helium
         appimage-run
+        claude-code
       ];
     };
   };

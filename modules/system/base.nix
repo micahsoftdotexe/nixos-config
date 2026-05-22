@@ -23,6 +23,13 @@
       LC_TIME = "en_US.UTF-8";
     };
 
+    programs.fish = {
+      enable = true;
+      interactiveShellInit = ''
+        set fish_greeting
+      '';
+    };
+
     services.printing.enable = true;
     services.tailscale.enable = true;
     services.gvfs.enable = true;

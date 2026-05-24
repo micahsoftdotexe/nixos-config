@@ -1,5 +1,8 @@
-{ ... }: {
-  flake.nixosModules.micaht = { pkgs, ... }: {
+{ self, ... }: {
+  flake.nixosModules.micahtUser = { pkgs, ... }: {
+    imports = [
+      self.nixosModules.homeManager
+    ];
     users.users.micaht = {
       shell = pkgs.fish;
       isNormalUser = true;

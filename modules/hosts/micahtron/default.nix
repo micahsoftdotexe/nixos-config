@@ -6,7 +6,7 @@
       self.nixosModules.desktopMango
       self.nixosModules.audioPortalPolkit
       self.nixosModules.systemPackages
-      self.nixosModules.micaht
+      self.nixosModules.micahtUser
       inputs.nur.modules.nixos.default
       {
         networking.hostName = "micahtron";

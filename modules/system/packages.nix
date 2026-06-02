@@ -11,6 +11,10 @@
       ghostty
       git
       android-studio
+      android-tools
+      abcde
+      vlc
+
     ];
     services.flatpak = {
       enable = true;

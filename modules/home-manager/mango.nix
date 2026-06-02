@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.homeModules.mango =
-    { config, lib, repoRoot, ... }:
+    { config, pkgs, lib, repoRoot, ... }:
     let
       cfg = config.wayland.windowManager.mango;
       useRepoConfig = cfg.repoFile != null;
@@ -32,6 +32,11 @@
 
         services.gnome-keyring.enable = true;
         wayland.windowManager.mango.enable = true;
+        home.packages = with pkgs; [
+          grim
+          slurp
+          wl-clipboard
+        ];
 
         xdg.configFile."mango/config.conf" = lib.mkIf useRepoConfig {
           source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${repoRoot}/${cfg.repoFile}");

@@ -3,12 +3,12 @@
     imports = [
       self.nixosModules.micahtHomeManager
     ];
-    services.sunshine = {
-      enable = true;
-      # autoStart = true;  # optional: starts Sunshine automatically on login
-      capSysAdmin = true;
-      openFirewall = true;
-    };
+    # services.sunshine = {
+    #   enable = true;
+    #   # autoStart = true;  # optional: starts Sunshine automatically on login
+    #   capSysAdmin = true;
+    #   openFirewall = true;
+    # };
     users.users.micaht = {
       shell = pkgs.fish;
       isNormalUser = true;
@@ -28,6 +28,7 @@
         bruno
         telegram-desktop
         calibre
+        libreoffice
       ];
     };
   };

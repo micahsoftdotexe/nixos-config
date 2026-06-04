@@ -8,6 +8,8 @@
       self.nixosModules.audioPortalPolkit
       self.nixosModules.systemPackages
       self.nixosModules.micahtUser
+      self.nixosModules.powerProfile
+      self.nixosModules.bluetooth
       inputs.nur.modules.nixos.default
       {
         networking.hostName = "micahtron";

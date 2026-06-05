@@ -14,6 +14,7 @@
       android-tools
       abcde
       vlc
+      picard
 
     ];
     services.flatpak = {

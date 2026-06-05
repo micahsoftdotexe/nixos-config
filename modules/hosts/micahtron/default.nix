@@ -1,5 +1,6 @@
 { self, inputs, ... }: {
   flake.nixosConfigurations.micahtron = inputs.nixpkgs.lib.nixosSystem {
+    # specialArgs = { inherit inputs; };
     modules = [
       self.nixosModules.globals
       self.nixosModules.micahtronHardware
@@ -10,6 +11,7 @@
       self.nixosModules.micahtUser
       self.nixosModules.powerProfile
       self.nixosModules.bluetooth
+      self.nixosModules.ai
       inputs.nur.modules.nixos.default
       {
         networking.hostName = "micahtron";

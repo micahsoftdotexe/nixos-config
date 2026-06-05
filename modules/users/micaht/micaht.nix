@@ -1,4 +1,4 @@
-{ self, ... }: {
+{ self, inputs, ... }: {
   flake.nixosModules.micahtUser = { pkgs, ... }: {
     imports = [
       self.nixosModules.micahtHomeManager
@@ -13,7 +13,7 @@
       shell = pkgs.fish;
       isNormalUser = true;
       description = "Micah";
-      extraGroups = [ "networkmanager" "wheel" "docker" "kvm" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "kvm" "render" "video" ];
       packages = with pkgs; [
         vscode
         brave
@@ -21,6 +21,7 @@
         localsend
         kdePackages.ark
         nur.repos.Ev357.helium
+        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
         appimage-run
         claude-code
         pavucontrol

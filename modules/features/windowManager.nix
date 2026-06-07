@@ -2,7 +2,7 @@
   flake.nixosModules.windowManager = { pkgs, ... }: {
     services.xserver.enable = true;
     services.xserver.displayManager.lightdm.enable = true;
-    services.displayManager.sessionPackages = [ inputs.mangowm.packages.${pkgs.system}.default ];
+    services.displayManager.sessionPackages = [ inputs.mangowm.packages.${pkgs.stdenv.hostPlatform.system}.default ];
 
     services.xserver.xkb = {
       layout = "us";

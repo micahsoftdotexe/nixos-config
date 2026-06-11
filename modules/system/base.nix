@@ -8,6 +8,10 @@
 
     networking.networkmanager.enable = true;
 
+    # LocalSend: TCP for file transfer, UDP for multicast device discovery
+    networking.firewall.allowedTCPPorts = [ 53317 ];
+    networking.firewall.allowedUDPPorts = [ 53317 ];
+
     time.timeZone = "America/New_York";
 
     i18n.defaultLocale = "en_US.UTF-8";

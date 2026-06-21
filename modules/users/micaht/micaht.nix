@@ -30,6 +30,8 @@
         telegram-desktop
         calibre
         libreoffice
+        termsonic
+        obsidian
       ];
     };
   };

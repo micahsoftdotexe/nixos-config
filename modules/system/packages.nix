@@ -1,7 +1,9 @@
 { inputs, ... }: {
   flake.nixosModules.systemPackages = { pkgs, ... }: {
-    imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ]; 
+    imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
     programs.direnv.enable = true;
+    programs.gnome-disks.enable = true;
+    services.udisks2.enable = true;
     virtualisation.docker.enable = true;
     nixpkgs.config.android_sdk.accept_license = true;
     environment.systemPackages = with pkgs; [
@@ -12,7 +14,6 @@
       git
       android-studio
       android-tools
-      abcde
       vlc
       picard
 

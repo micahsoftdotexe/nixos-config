@@ -19,6 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Local checkout for testing the abcde flake before it is upstreamed.
+    abcde = {
+      url = "path:/home/micaht/Projects/abcde";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -13,6 +13,7 @@
       self.nixosModules.bluetooth
       self.nixosModules.ai
       self.nixosModules.printing
+      self.nixosModules.abcde
       inputs.nur.modules.nixos.default
       {
         networking.hostName = "micahtron";

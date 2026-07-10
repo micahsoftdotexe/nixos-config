@@ -9,6 +9,8 @@
         OUTPUTTYPE = "flac";
         # artist/album/<tracknum>.<title>  (abcde expands these at runtime)
         OUTPUTFORMAT = "\${ARTISTFILE}/\${ALBUMFILE}/\${TRACKNUM}_\${TRACKFILE}";
+        # abcde does not eject on its own; opt in. Rendered as EJECTCD=y.
+        EJECTCD = true;
       };
     };
   };

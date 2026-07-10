@@ -19,9 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Local checkout for testing the abcde flake before it is upstreamed.
     abcde = {
-      url = "path:/home/micaht/Projects/abcde";
+      url = "github:micahsoftdotexe/abcde/feature/nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

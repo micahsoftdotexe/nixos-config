@@ -16,6 +16,7 @@
       android-tools
       vlc
       picard
+      devenv
 
     ];
     services.flatpak = {

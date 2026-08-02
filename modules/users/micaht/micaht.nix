@@ -32,6 +32,9 @@
         libreoffice
         termsonic
         obsidian
+        ffmpeg
+        cheese
+        handbrake
       ];
     };
   };

@@ -17,6 +17,9 @@
       vlc
       picard
       devenv
+      gimp
+      inkscape
+      libation
 
     ];
     services.flatpak = {

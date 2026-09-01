@@ -3,6 +3,7 @@
     imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
     programs.direnv.enable = true;
     programs.gnome-disks.enable = true;
+    programs.steam.enable = true;
     services.udisks2.enable = true;
     virtualisation.docker.enable = true;
     nixpkgs.config.android_sdk.accept_license = true;

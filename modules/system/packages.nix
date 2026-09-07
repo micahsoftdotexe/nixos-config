@@ -21,7 +21,6 @@
       gimp
       inkscape
       libation
-
     ];
     services.flatpak = {
       enable = true;

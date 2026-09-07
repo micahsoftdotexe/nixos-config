@@ -11,7 +11,7 @@
       self.nixosModules.micahtUser
       self.nixosModules.powerProfile
       self.nixosModules.bluetooth
-      self.nixosModules.ai
+      # self.nixosModules.ai
       self.nixosModules.printing
       self.nixosModules.abcde
       inputs.nur.modules.nixos.default

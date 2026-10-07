@@ -21,6 +21,7 @@
       gimp
       inkscape
       libation
+      makemkv
     ];
     services.flatpak = {
       enable = true;
@@ -28,6 +29,7 @@
         "us.zoom.Zoom"
         "app.fluxer.Fluxer"
         "com.moonlight_stream.Moonlight"
+        "net.lutris.Lutris"
       ];
     };
   };

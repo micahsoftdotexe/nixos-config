@@ -13,7 +13,7 @@
       shell = pkgs.fish;
       isNormalUser = true;
       description = "Micah";
-      extraGroups = [ "networkmanager" "wheel" "docker" "kvm" "render" "video" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "kvm" "render" "video" "cdromd" ];
       packages = with pkgs; [
         vscode
         brave
@@ -35,6 +35,8 @@
         ffmpeg
         cheese
         handbrake
+        libdvdcss
+        digikam
       ];
     };
   };

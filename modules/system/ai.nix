@@ -10,7 +10,7 @@
     };
 
     systemd.services.llama-cpp = {
-      description = "llama.cpp server (Qwen3.6-35B-A3B)";
+      description = "llama.cpp server (Qwen3.6-27B)";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       environment = {
@@ -20,12 +20,21 @@
       serviceConfig = {
         ExecStart = lib.concatStringsSep " " [
           "${pkgs.llama-cpp-vulkan}/bin/llama-server"
-          "-hf unsloth/Qwen3.6-35B-A3B-GGUF:UD-IQ4_NL"
+          # Q6_K is ~22.5 GB; leaves room for a large KV cache in 32 GB VRAM
+          "-hf unsloth/Qwen3.6-27B-GGUF:Q6_K"
           "--port 8081"
           "--host 127.0.0.1"
           "--n-gpu-layers 99"
-          "--ctx-size 4096"
+          "--ctx-size 65536"
+          "--cache-type-k q8_0"
+          "--cache-type-v q8_0"
+          "--flash-attn on"
           "--parallel 1"
+          # Qwen's recommended sampling for coding
+          "--temp 0.6"
+          "--top-p 0.95"
+          "--top-k 20"
+          "--min-p 0"
         ];
         Restart = "on-failure";
         User = "micaht";

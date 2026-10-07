@@ -13,7 +13,7 @@
       shell = pkgs.fish;
       isNormalUser = true;
       description = "Micah";
-      extraGroups = [ "networkmanager" "wheel" "docker" "kvm" "render" "video" "cdromd" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "kvm" "render" "video" "cdrom" ];
       packages = with pkgs; [
         vscode
         brave

@@ -6,6 +6,13 @@
     services.displayManager.noctalia-greeter.enable = true;
     services.displayManager.sessionPackages = [ inputs.mangowm.packages.${pkgs.stdenv.hostPlatform.system}.default ];
 
+    # Also registers a Hyprland session with the greeter
+    programs.hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    };
+
     # greetd-based Wayland greeter (replaces lightdm).
     # programs.noctalia-greeter.enable = true;
     # services.greetd.settings.default_session.user = "greeter";

@@ -8,7 +8,6 @@
       neovim
       inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
       ghostty
-      git
       vlc
       picard
       devenv

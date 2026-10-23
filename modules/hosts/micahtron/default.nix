@@ -1,25 +1,32 @@
-{ self, inputs, ... }: {
-  flake.nixosConfigurations.micahtron = inputs.nixpkgs.lib.nixosSystem {
-    # specialArgs = { inherit inputs; };
-    modules = [
-      self.nixosModules.globals
-      self.nixosModules.micahtronHardware
-      self.nixosModules.systemBase
-      self.nixosModules.windowManager
-      self.nixosModules.audioPortalPolkit
-      self.nixosModules.systemPackages
-      self.nixosModules.micahtUser
-      self.nixosModules.powerProfile
-      self.nixosModules.bluetooth
-      self.nixosModules.ai
-      self.nixosModules.printing
-      self.nixosModules.abcde
+{ self, inputs, config, ... }: {
+  flake.modules.nixos.micahtron = {
+    imports = with self.modules.nixos; [
+      base
+      networking
+      pinned
+      audio
+      greeter
+      mango
+      hyprland
+      desktopApps
+      flatpak
+      gaming
+      docker
+      android
+      power
+      bluetooth
+      ai
+      printing
+      abcde
+      self.modules.nixos.${config.flake.meta.owner.username}
       inputs.nur.modules.nixos.default
-      {
-        networking.hostName = "micahtron";
-        system.stateVersion = "25.11";
-        globals.repoRoot = "/home/micaht/nixos-config";
-      }
     ];
+
+    networking.hostName = "micahtron";
+    system.stateVersion = "25.11";
+  };
+
+  flake.nixosConfigurations.micahtron = inputs.nixpkgs.lib.nixosSystem {
+    modules = [ self.modules.nixos.micahtron ];
   };
 }

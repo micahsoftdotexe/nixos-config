@@ -1,5 +1,5 @@
-{ ... }: {
-  flake.nixosModules.ai = { pkgs, lib, ... }: {
+{ config, ... }: {
+  flake.modules.nixos.ai = { pkgs, lib, ... }: {
     services.open-webui = {
       enable = true;
       port = 8080;
@@ -37,7 +37,7 @@
           "--min-p 0"
         ];
         Restart = "on-failure";
-        User = "micaht";
+        User = config.flake.meta.owner.username;
       };
     };
   };

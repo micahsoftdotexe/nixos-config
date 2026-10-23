@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  flake.nixosModules.abcde = { pkgs, ... }: {
+  flake.modules.nixos.abcde = { pkgs, ... }: {
     imports = [ inputs.abcde.nixosModules.default ];
     programs.abcde = {
       enable = true;

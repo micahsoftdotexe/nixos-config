@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.homeModules.nvchad =
+  flake.modules.homeManager.nvchad =
     { ... }:
     {
       imports = [ inputs.nix4nvchad.homeManagerModules.default ];

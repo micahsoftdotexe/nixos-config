@@ -1,5 +1,5 @@
 { ... }: {
-  flake.nixosModules.battery = { pkgs, ... }: {
+  flake.modules.nixos.battery = { pkgs, ... }: {
     services.upower.enable = true;
   };
 }

@@ -1,7 +1,16 @@
-{ inputs, ... }:
+{ self, inputs, config, ... }:
+let
+  inherit (config.flake.meta) repoRoot;
+in
 {
-  flake.homeModules.mango =
-    { config, pkgs, lib, repoRoot, ... }:
+  flake.modules.nixos.mango = { pkgs, ... }: {
+    services.displayManager.sessionPackages = [ inputs.mangowm.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+
+    home-manager.sharedModules = [ self.modules.homeManager.mango ];
+  };
+
+  flake.modules.homeManager.mango =
+    { config, pkgs, lib, ... }:
     let
       cfg = config.wayland.windowManager.mango;
       useRepoConfig = cfg.repoFile != null;
@@ -13,7 +22,7 @@
         type = with lib.types; nullOr str;
         default = "config/mango/config.conf";
         example = "config/mango/laptop.conf";
-        description = "Path to the mango config file inside flake.repoRoot. Set to null to use the upstream Home Manager-generated config instead.";
+        description = "Path to the mango config file inside flake.meta.repoRoot. Set to null to use the upstream Home Manager-generated config instead.";
       };
 
       config = {

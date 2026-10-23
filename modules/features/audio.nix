@@ -1,5 +1,5 @@
 { ... }: {
-  flake.nixosModules.audioPortalPolkit = { pkgs, ... }: {
+  flake.modules.nixos.audio = { pkgs, ... }: {
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     security.polkit.enable = true;

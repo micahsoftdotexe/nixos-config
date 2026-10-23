@@ -1,5 +1,5 @@
 {...}: {
-  flake.nixosModules.printing = { pkgs, ... }: {
+  flake.modules.nixos.printing = { pkgs, ... }: {
     services.ipp-usb.enable = true;
     services.printing = {
       enable = true;

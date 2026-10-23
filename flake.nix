@@ -1,6 +1,8 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Older rev for packages broken on unstable, see modules/features/pinned.nix
+    nixpkgs-pinned.url = "github:nixos/nixpkgs/7fd4004d0511991fff3a0524856a9be09e28c5f0";
     home-manager.url = "github:nix-community/home-manager";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     

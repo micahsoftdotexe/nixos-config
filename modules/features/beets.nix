@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.homeModules.beets =
+  flake.modules.homeManager.beets =
     { ... }:
     {
       programs.beets = {

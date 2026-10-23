@@ -1,19 +1,22 @@
-{ self, inputs, ... }: {
-  flake.nixosModules.micahtUser = { pkgs, ... }: {
-    imports = [
-      self.nixosModules.micahtHomeManager
-    ];
+{ self, inputs, config, ... }:
+let
+  inherit (config.flake.meta.owner) username;
+in
+{
+  flake.modules.nixos.${username} = { pkgs, ... }: {
+    imports = [ self.modules.nixos.homeManager ];
+
     # services.sunshine = {
     #   enable = true;
     #   # autoStart = true;  # optional: starts Sunshine automatically on login
     #   capSysAdmin = true;
     #   openFirewall = true;
     # };
-    users.users.micaht = {
+    users.users.${username} = {
       shell = pkgs.fish;
       isNormalUser = true;
-      description = "Micah";
-      extraGroups = [ "networkmanager" "wheel" "docker" "kvm" "render" "video" "cdrom" ];
+      description = config.flake.meta.owner.name;
+      extraGroups = [ "networkmanager" "wheel" "kvm" "render" "video" "cdrom" ];
       packages = with pkgs; [
         vscode
         brave
@@ -25,10 +28,8 @@
         appimage-run
         claude-code
         pavucontrol
-        docker-compose
         bruno
         telegram-desktop
-        calibre
         libreoffice
         termsonic
         obsidian
@@ -39,5 +40,18 @@
         digikam
       ];
     };
+
+    home-manager.users.${username} = {
+      imports = [ self.modules.homeManager.${username} ];
+    };
+  };
+
+  flake.modules.homeManager.${username} = {
+    imports = with self.modules.homeManager; [
+      beets
+      nvchad
+    ];
+
+    home.stateVersion = "25.11";
   };
 }

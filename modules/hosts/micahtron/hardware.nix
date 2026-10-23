@@ -1,5 +1,5 @@
-{self, inputs, ... }: {
-  flake.nixosModules.micahtronHardware = {config, lib, modulesPath, ...}: {
+{ ... }: {
+  flake.modules.nixos.micahtron = {config, lib, modulesPath, ...}: {
     imports = [
       (modulesPath + "/installer/scan/not-detected.nix") 
     ];

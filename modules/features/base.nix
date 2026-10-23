@@ -1,16 +1,10 @@
 { ... }: {
-  flake.nixosModules.systemBase = { pkgs, ... }: {
+  flake.modules.nixos.base = { pkgs, ... }: {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
-
-    networking.networkmanager.enable = true;
-
-    # LocalSend: TCP for file transfer, UDP for multicast device discovery
-    networking.firewall.allowedTCPPorts = [ 53317 ];
-    networking.firewall.allowedUDPPorts = [ 53317 ];
 
     time.timeZone = "America/New_York";
 
@@ -34,8 +28,6 @@
       '';
     };
 
-    services.printing.enable = true;
-    services.tailscale.enable = true;
     services.gvfs.enable = true;
 
     nixpkgs.config.allowUnfree = true;

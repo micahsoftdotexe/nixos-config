@@ -17,28 +17,7 @@ in
       isNormalUser = true;
       description = config.flake.meta.owner.name;
       extraGroups = [ "networkmanager" "wheel" "kvm" "render" "video" "cdrom" ];
-      packages = with pkgs; [
-        vscode
-        brave
-        calibre
-        localsend
-        kdePackages.ark
-        nur.repos.Ev357.helium
-        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-        appimage-run
-        claude-code
-        pavucontrol
-        bruno
-        telegram-desktop
-        libreoffice
-        termsonic
-        obsidian
-        ffmpeg
-        cheese
-        handbrake
-        libdvdcss
-        digikam
-      ];
+      # Packages are added per host in modules/hosts/<host>/default.nix
     };
 
     home-manager.users.${username} = {

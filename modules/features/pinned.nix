@@ -12,9 +12,9 @@
         in
         {
           # https://github.com/NixOS/nixpkgs/issues/576333
-          inherit (pinned) handbrake;
+          # inherit (pinned) handbrake;
           # makeShellWrapper / pyopenjtalk-plus test failures
-          inherit (pinned) hplip calibre open-webui;
+          inherit (pinned) open-webui; #hplip calibre 
         })
     ];
   };

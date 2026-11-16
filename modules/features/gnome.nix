@@ -1,5 +1,5 @@
 { ... }: {
-  flake.modules.nixos.gnome = { ... }: {
+  flake.modules.nixos.gnome = { pkgs, ... }: {
     services.xserver.enable = true;
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
@@ -8,5 +8,8 @@
       layout = "us";
       variant = "";
     };
+    environment.systemPackages = with pkgs; [
+    	gnomeExtensions.color-picker
+    ];
   };
 }

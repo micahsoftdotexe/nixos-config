@@ -9,6 +9,7 @@ in
       networking
       audio
       gnome
+#      printing
       flatpak
       bluetooth
       self.modules.nixos.${username}
@@ -16,7 +17,9 @@ in
 
     users.users.${username}.packages = with pkgs; [
       brave
+      firefox
       localsend
+      vscodium
     ];
 
     services.flatpak.packages = [

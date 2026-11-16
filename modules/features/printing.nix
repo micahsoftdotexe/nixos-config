@@ -8,6 +8,7 @@
         gutenprint
         gutenprintBin
         canon-cups-ufr2
+	splix
         # cnijfilter2
         # epson-inkjet-escpr
         # brother-brlaser
